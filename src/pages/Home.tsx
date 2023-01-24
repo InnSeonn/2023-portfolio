@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
+import { BsArrowUp } from 'react-icons/bs';
 
 const ani = (content: string) => keyframes`
   ${content}
@@ -55,11 +56,19 @@ const HomeParagraph = styled.p<{ order: number; content: string }>`
   }
 `;
 const HomeButtonText = styled.span`
+  position: relative;
   margin-top: -3em;
   margin-right: -1.4em;
   opacity: 0.6;
   letter-spacing: 0.05em;
   writing-mode: vertical-rl;
+`;
+const HomeArrowUp = styled(BsArrowUp)`
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
 `;
 const HomeButton = styled.button<{ order: number }>`
   position: relative;
@@ -106,9 +115,17 @@ const HomeButton = styled.button<{ order: number }>`
     opacity: 0.15;
     content: '';
   }
-  &:hover ${HomeButtonText} {
-    opacity: 1;
-    transition: all 0.5s;
+  &:hover {
+    ${HomeButtonText} {
+      opacity: 1;
+      transition: all 0.5s;
+    }
+    ${HomeArrowUp} {
+      visibility: visible;
+      top: -1.3em;
+      opacity: 1;
+      transition: all 0.5s;
+    }
   }
 `;
 
@@ -120,8 +137,11 @@ export default function Home() {
   };
 
   const mouseEventHandler = (e: React.MouseEvent) => {
-    if (e.target instanceof HTMLButtonElement) {
-      e.type === 'mouseover' ? (e.target.style.animationPlayState = 'paused') : (e.target.style.animationPlayState = 'running');
+    if (e.target instanceof HTMLElement) {
+      const target = e.target instanceof HTMLButtonElement ? e.target : e.target.parentElement;
+      if (target instanceof HTMLButtonElement) {
+        e.type === 'mouseover' ? (target.style.animationPlayState = 'paused') : (target.style.animationPlayState = 'running');
+      }
     }
   };
 
@@ -153,13 +173,22 @@ export default function Home() {
       </HomeCol>
       <HomeCol col={2} onAnimationEnd={handleAnimationEnd} onMouseOver={mouseEventHandler} onMouseOut={mouseEventHandler}>
         <HomeButton order={1}>
-          <HomeButtonText>about</HomeButtonText>
+          <HomeButtonText>
+            <HomeArrowUp />
+            about
+          </HomeButtonText>
         </HomeButton>
         <HomeButton order={3}>
-          <HomeButtonText>projects</HomeButtonText>
+          <HomeButtonText>
+            <HomeArrowUp />
+            projects
+          </HomeButtonText>
         </HomeButton>
         <HomeButton order={2}>
-          <HomeButtonText>contact</HomeButtonText>
+          <HomeButtonText>
+            <HomeArrowUp />
+            contact
+          </HomeButtonText>
         </HomeButton>
       </HomeCol>
     </HomeLayout>
