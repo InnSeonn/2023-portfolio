@@ -9,6 +9,8 @@ const Variables = css`
     --color-bg: #f3f5f9;
     --color-black: #121212;
     --color-grey-light: #e8ebf1;
+    --color-grey: #9fa1a7;
+    --color-blue: #acc8e3;
   }
 `;
 
@@ -28,6 +30,7 @@ const GlobalStyle = createGlobalStyle`
 	a {
 		color: inherit;
 		text-decoration: none;
+		cursor: pointer;
 	}
 	button {
 		display: block;
