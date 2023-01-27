@@ -34,6 +34,7 @@ const GlobalStyle = createGlobalStyle`
 	}
 	button {
 		display: block;
+		padding: 0;
 		border: none;
 		background: none;
 		appearance: none;
