@@ -23,10 +23,10 @@ const HeaderLogoBox = styled.div`
   border: 1px solid var(--color-grey-light);
   font-size: 1.25rem;
   font-weight: bold;
+  font-family: 'Italiana';
 `;
 const HeaderList = styled.ul`
   font-size: 1rem;
-  font-family: 'Noto Sans KR';
   text-transform: capitalize;
   letter-spacing: -0.03em;
 `;

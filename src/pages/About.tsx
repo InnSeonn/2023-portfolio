@@ -9,7 +9,6 @@ const AboutLayout = styled.section`
   width: 100vw;
   height: 100vh;
   background-color: var(--color-bg);
-  font-family: 'Noto Sans KR';
 `;
 const AboutCol = styled.div<{ col: number }>`
   margin: calc(var(--container-padding) * 3) 0;
@@ -38,7 +37,7 @@ const AboutDescParagraph = styled.p`
   padding: 2em 0 4em;
   color: var(--color-grey);
   font-size: 1.25rem;
-  font-weight: 100;
+  font-weight: 200;
   line-height: 1.5;
 `;
 const AboutTextSpan = styled.span`
@@ -60,7 +59,7 @@ const AboutLink = styled.a`
   display: inline-flex;
   justify-content: flex-start;
   align-items: center;
-  font-weight: 700;
+  font-weight: 900;
   font-size: 1rem;
   opacity: 0.7;
   &:hover {
@@ -78,7 +77,7 @@ const AboutRow = styled.div`
   background-size: 2em 2em;
   background-image: repeating-linear-gradient(0deg, var(--color-blue), var(--color-blue) 1px, var(--color-bg) 1px, var(--color-bg));
   font-size: 1.125rem;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 2em;
   svg {
     transform: translateY(50%);

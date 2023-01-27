@@ -24,8 +24,8 @@ const GlobalStyle = createGlobalStyle`
 	}
 	body {
 		color: var(--color-black);
-		font-weight: 400;
-		font-family: 'Italiana', 'Noto Sans KR', serif, sans-serif;
+		font-weight: 300;
+		font-family: 'SUIT';
 	}
 	a {
 		color: inherit;
