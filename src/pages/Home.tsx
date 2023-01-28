@@ -1,6 +1,8 @@
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { BsArrowUp } from 'react-icons/bs';
+import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ani = (content: string) => keyframes`
   ${content}
@@ -11,6 +13,7 @@ const HomeLayout = styled.section`
   width: 100vw;
   height: 100vh;
   background-color: var(--color-bg);
+  font-family: 'Italiana';
 `;
 const HomeCol = styled.div<{ col: number }>`
   ${(props) =>
@@ -49,7 +52,7 @@ const HomeParagraph = styled.p<{ order: number; content: string }>`
     display: block;
     position: absolute;
     inset: 0 0 0 0;
-    color: #000;
+    color: var(--color-black);
     clip-path: inset(100% 0 0 0);
     animation: ${ani(`to{clip-path: inset(0 0 0 0)}`)} 2s ${(props) => 1 + props.order * 0.3}s forwards;
     content: '${(props) => props.content}';
@@ -106,6 +109,12 @@ const HomeButton = styled.button<{ order: number }>`
       100% {transform: translateY(-10px)}
     `)} 2s cubic-bezier(0.42, 0, 0.56, 1.13) infinite;
   }
+  &.up {
+    animation: ${ani(`
+      0% {transform: translateY(10px)}
+      100% {transform: translateY(-300%)}
+    `)} 1s cubic-bezier(0, 0, 0.45, 1.06) forwards;
+  }
   &::after {
     position: absolute;
     inset: 0 0 0 0;
@@ -128,8 +137,24 @@ const HomeButton = styled.button<{ order: number }>`
     }
   }
 `;
+const HomeColorBox = styled.div`
+  visibility: hidden;
+  position: fixed;
+  inset: 0 0 0 0;
+  background-color: var(--color-bg);
+  clip-path: inset(100% 0 0 0);
+  &.show {
+    visibility: visible;
+    clip-path: inset(0 0 0 0);
+    transition: all 1s;
+  }
+`;
 
 export default function Home() {
+  const navigate = useNavigate();
+  const btnRef = useRef<(null | HTMLButtonElement)[]>([null]);
+  const colorBoxRef = useRef<HTMLDivElement>(null);
+
   const handleAnimationEnd = (e: React.AnimationEvent) => {
     if (e.target instanceof HTMLButtonElement) {
       e.target.classList.add('bounce');
@@ -142,6 +167,24 @@ export default function Home() {
       if (target instanceof HTMLButtonElement) {
         e.type === 'mouseover' ? (target.style.animationPlayState = 'paused') : (target.style.animationPlayState = 'running');
       }
+    }
+  };
+
+  const handleButtonClick = (e: React.MouseEvent) => {
+    if (e.target instanceof HTMLButtonElement) {
+      btnRef.current.map((btn) => {
+        if (btn) {
+          btn.classList.add('up');
+          btn.style.animationPlayState = 'running';
+        }
+      });
+      colorBoxRef.current?.classList.add('show');
+      const time = Number(getComputedStyle(e.target).animationDuration.replace('s', '')) * 900;
+      setTimeout(() => {
+        if (e.target instanceof HTMLButtonElement) {
+          navigate(`/${e.target.textContent}`);
+        }
+      }, time);
     }
   };
 
@@ -171,26 +214,27 @@ export default function Home() {
           </HomeTextBox>
         </HomeTitleBox>
       </HomeCol>
-      <HomeCol col={2} onAnimationEnd={handleAnimationEnd} onMouseOver={mouseEventHandler} onMouseOut={mouseEventHandler}>
-        <HomeButton order={1}>
+      <HomeCol col={2} onAnimationEnd={handleAnimationEnd} onMouseOver={mouseEventHandler} onMouseOut={mouseEventHandler} onClick={handleButtonClick}>
+        <HomeButton order={1} ref={(elem) => (btnRef.current[0] = elem)}>
           <HomeButtonText>
             <HomeArrowUp />
             about
           </HomeButtonText>
         </HomeButton>
-        <HomeButton order={3}>
+        <HomeButton order={3} ref={(elem) => (btnRef.current[1] = elem)}>
           <HomeButtonText>
             <HomeArrowUp />
             projects
           </HomeButtonText>
         </HomeButton>
-        <HomeButton order={2}>
+        <HomeButton order={2} ref={(elem) => (btnRef.current[2] = elem)}>
           <HomeButtonText>
             <HomeArrowUp />
             contact
           </HomeButtonText>
         </HomeButton>
       </HomeCol>
+      <HomeColorBox ref={colorBoxRef} />
     </HomeLayout>
   );
 }

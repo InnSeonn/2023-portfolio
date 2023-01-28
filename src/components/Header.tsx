@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const HeaderLayout = styled.header`
@@ -7,6 +7,7 @@ const HeaderLayout = styled.header`
   inset: 0 0 auto 0;
   padding: 20px var(--container-padding);
   /* background-color: var(--color-bg); */
+  z-index: 999;
 `;
 const HeaderNav = styled.nav`
   display: flex;
@@ -47,18 +48,18 @@ export default function Header() {
     <HeaderLayout>
       <HeaderNav>
         <HeaderLogoBox>
-          <a href=''>Inn</a>
+          <Link to='/'>Inn</Link>
         </HeaderLogoBox>
         {isDisplay && (
           <HeaderList>
             <HeaderItem>
-              <a href=''>about</a>
+              <Link to='/about'>about</Link>
             </HeaderItem>
             <HeaderItem>
-              <a href=''>projects</a>
+              <Link to='/projects'>projects</Link>
             </HeaderItem>
             <HeaderItem>
-              <a href=''>contact</a>
+              <Link to='/contact'>contact</Link>
             </HeaderItem>
           </HeaderList>
         )}
