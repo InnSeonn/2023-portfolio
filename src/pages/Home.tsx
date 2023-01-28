@@ -3,10 +3,8 @@ import styled, { css, keyframes } from 'styled-components';
 import { BsArrowUp } from 'react-icons/bs';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ani } from '../components/GlobalStyle';
 
-const ani = (content: string) => keyframes`
-  ${content}
-`;
 const HomeLayout = styled.section`
   overflow: hidden;
   display: flex;

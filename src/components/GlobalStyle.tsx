@@ -1,7 +1,7 @@
 import Reset from 'styled-reset';
 import { keyframes, css, createGlobalStyle } from 'styled-components';
 
-const ani = (content: string) => keyframes`
+export const ani = (content: string) => keyframes`
   ${content}
 `;
 export const bounceAnimation = css`

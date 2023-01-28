@@ -1,10 +1,7 @@
 import styled, { keyframes, css } from 'styled-components';
 import { PageType } from './Pagination';
-import { useRef } from 'react';
+import { ani } from './GlobalStyle';
 
-const ani = (content: string) => keyframes`
-  ${content}
-`;
 const ProjectImgBox = styled.div`
   width: 100%;
   height: 440px;
