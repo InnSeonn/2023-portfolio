@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Pagination from '../components/Pagination';
 import Project, { ProjectType } from '../components/Project';
-import { bounceAnimation } from '../components/GlobalStyle';
 
 const ProjectPageLayout = styled.section`
   display: flex;
@@ -11,7 +10,6 @@ const ProjectPageLayout = styled.section`
   background-color: #fff;
 `;
 const ProjectPageCol = styled.div<{ col: number }>`
-  ${bounceAnimation}
   ${(props) =>
     (props.col === 1 &&
       css`

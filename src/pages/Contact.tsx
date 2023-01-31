@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ani, bounceAnimation } from '../components/GlobalStyle';
+import { ani } from '../components/GlobalStyle';
 import { RiArrowRightUpLine } from 'react-icons/ri';
 
 const ContactLayout = styled.section`
@@ -8,7 +8,6 @@ const ContactLayout = styled.section`
   background-color: var(--color-bg);
 `;
 const ContactBox = styled.div`
-  ${bounceAnimation}
   display: flex;
   width: 100%;
   height: 100%;
