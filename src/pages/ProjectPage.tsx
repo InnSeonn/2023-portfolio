@@ -19,7 +19,7 @@ const ProjectPageCol = styled.div<{ col: number }>`
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-end;
-        width: 35%;
+        width: 20%;
         margin: calc(var(--container-padding) * 3) 0;
         padding: 0 var(--container-padding);
         border-right: 1px solid var(--color-grey-light);
@@ -30,18 +30,9 @@ const ProjectPageCol = styled.div<{ col: number }>`
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        width: 65%;
+        width: 80%;
         margin: calc(var(--container-padding) * 3) var(--container-padding);
       `)}
-`;
-const ProjectPageTitleParagraph = styled.p`
-  font-size: 5rem;
-  font-weight: 100;
-  line-height: 1.3;
-`;
-const ProjectPageSubParagraph = styled.p`
-  color: var(--color-grey);
-  line-height: 1.5;
 `;
 const ProjectPageSlideBox = styled.div`
   overflow: hidden;
@@ -55,10 +46,6 @@ const ProjectPageSlideList = styled.ul`
   display: flex;
   width: 100%;
   transition: all 0.5s;
-`;
-
-const ProjectPageBtnList = styled.ul`
-  margin-top: 1rem;
 `;
 
 export default function ProjectPage() {
@@ -129,15 +116,11 @@ export default function ProjectPage() {
   return (
     <ProjectPageLayout>
       <ProjectPageCol col={1}>
-        <div>
-          <ProjectPageTitleParagraph>Website</ProjectPageTitleParagraph>
-          <ProjectPageSubParagraph>학습하며 개인으로 제작한 웹사이트</ProjectPageSubParagraph>
-        </div>
-        <ProjectPageBtnList>
+        <ul>
           {projectItem.current.map((elem, index) => (
             <Pagination key={index} id={index} page={page} setPage={setPage} />
           ))}
-        </ProjectPageBtnList>
+        </ul>
       </ProjectPageCol>
       <ProjectPageCol col={2}>
         <ProjectPageSlideBox draggable='false' ref={slideRef} onMouseDown={mouseEventHandler}>

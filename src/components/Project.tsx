@@ -71,8 +71,8 @@ const ProjectButton = styled.button`
 const ProjectItem = styled.li<{ active: boolean }>`
   position: relative;
   flex-shrink: 0;
-  width: 20%;
-  max-width: 700px;
+  width: 15%;
+  max-width: 900px;
   margin-right: 40px;
   transition: width 0.5s;
   ${(props) =>
@@ -107,7 +107,7 @@ export default function Project({ item, page, setPage }: Props) {
   return (
     <ProjectItem active={id === page ? true : false} onClick={handleItemClick}>
       <ProjectImgBox>
-        <img src={`${require(`../images/project${id}.png`)}`} alt='' />
+        <img src={`${require(`../images/project_900_${id}.png`)}`} alt='' />
       </ProjectImgBox>
       <ProjectTextBox>
         <ProjectNameParagraph>{name}</ProjectNameParagraph>
