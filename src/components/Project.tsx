@@ -1,6 +1,8 @@
-import styled, { keyframes, css } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { PageType } from './Pagination';
 import { ani } from './GlobalStyle';
+import { useNavigate } from 'react-router-dom';
+import { ProjectType } from '../db/projectData';
 
 const ProjectImgBox = styled.div`
   width: 100%;
@@ -88,20 +90,20 @@ const ProjectItem = styled.li<{ active: boolean }>`
     `}
 `;
 
-export type ProjectType = {
-  id: number;
-  name: string;
-  text: string;
-};
 type Props = PageType & {
   item: ProjectType;
 };
 
 export default function Project({ item, page, setPage }: Props) {
   const { id, name, text } = item;
+  const navigate = useNavigate();
 
   const handleItemClick = (e: React.MouseEvent) => {
     setPage(id);
+  };
+
+  const goToDetailPage = (e: React.MouseEvent) => {
+    navigate(`./detail/:${name}`);
   };
 
   return (
@@ -113,7 +115,7 @@ export default function Project({ item, page, setPage }: Props) {
         <ProjectNameParagraph>{name}</ProjectNameParagraph>
         <ProjectDescParagraph>{text}</ProjectDescParagraph>
       </ProjectTextBox>
-      <ProjectButton>자세히보기</ProjectButton>
+      <ProjectButton onClick={goToDetailPage}>자세히보기</ProjectButton>
     </ProjectItem>
   );
 }

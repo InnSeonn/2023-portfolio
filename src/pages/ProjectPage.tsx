@@ -1,13 +1,16 @@
 import styled, { css } from 'styled-components';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Pagination from '../components/Pagination';
-import Project, { ProjectType } from '../components/Project';
+import Project from '../components/Project';
+import projectData from '../db/projectData';
 
 const ProjectPageLayout = styled.section`
+  position: absolute;
   display: flex;
   width: 100vw;
   height: 100vh;
   background-color: #fff;
+  z-index: 10; //페이지 전환 시 absolute 인해 겹치지 않도록
 `;
 const ProjectPageCol = styled.div<{ col: number }>`
   ${(props) =>
@@ -47,23 +50,7 @@ const ProjectPageSlideList = styled.ul`
 `;
 
 export default function ProjectPage() {
-  const projectItem = useRef<ProjectType[]>([
-    {
-      id: 0,
-      name: 'portfolio',
-      text: '개인 프로젝트와 본인 소개를 담은 반응형 포트폴리오 웹사이트',
-    },
-    {
-      id: 1,
-      name: 'todolist',
-      text: '할 일을 추가하고 관리할 수 있는 반응형 투두리스트 웹사이트',
-    },
-    {
-      id: 2,
-      name: 'clone website',
-      text: 'UI와 기능을 참고하여 제작한 반응형 클론 웹사이트',
-    },
-  ]);
+  const projectItem = useRef(projectData);
   const slideRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
   const startX = useRef(0);
