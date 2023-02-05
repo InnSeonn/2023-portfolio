@@ -123,7 +123,9 @@ export default function ProjectDetail() {
         </ProjectDetailImgBox>
       </ProjectDetailCol>
       <ProjectDetailCol col={2}>
-        <ProjectStory name={data.current?.name} active={active} setActive={setActive} />
+        {data.current?.story.map((item) => (
+          <ProjectStory key={item.id} item={item} active={active} setActive={setActive} />
+        ))}
       </ProjectDetailCol>
     </ProjectDetailLayout>
   );
