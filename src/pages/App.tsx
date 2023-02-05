@@ -16,6 +16,15 @@ const AppLayout = styled.div<{ overflowY: string }>`
   position: relative;
   width: 100vw;
   height: 100vh;
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #000;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg);
+  }
 `;
 
 function App() {
