@@ -16,21 +16,22 @@ const AboutCol = styled.div<{ col: number }>`
   ${(props) =>
     (props.col === 1 &&
       css`
-        width: 45%;
+        width: 55%;
         border-right: 1px solid var(--color-grey-light);
       `) ||
     (props.col === 2 &&
       css`
         display: flex;
-        justify-content: flex-start;
-        align-items: flex-end;
-        width: 55%;
-        color: #333;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-start;
       `)}
 `;
 const AboutTitleParagraph = styled.p`
+  color: transparent;
   font-size: 5rem;
-  font-weight: 100;
+  font-weight: 900;
+  -webkit-text-stroke: 1px var(--color-black);
   line-height: 1.3;
 `;
 const AboutDescParagraph = styled.p`
@@ -40,18 +41,28 @@ const AboutDescParagraph = styled.p`
   font-weight: 200;
   line-height: 1.5;
 `;
-const AboutTextSpan = styled.span`
-  padding: 0.5em 0;
-  border-bottom: 1px solid var(--color-blue);
+const AboutLinkBox = styled.span`
+  display: flex;
+  align-items: center;
 `;
-const AboutTextBox = styled.span`
+const AboutIconBox = styled.div`
   overflow: hidden;
+  margin-left: 0.5em;
+`;
+const AboutIconCircleBox = styled.div`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  margin-left: 0.5em;
+  width: 3rem;
+  height: 3rem;
+  margin-right: 0.5em;
+  border-radius: 50%;
+  background: var(--color-black);
+  color: #fff;
+  font-size: 1.5rem;
 `;
 const AboutArrowSvg = styled(BsArrowRight)`
+  display: block;
   transform: translateX(-100%);
   transition: all 0.5s;
 `;
@@ -61,36 +72,41 @@ const AboutLink = styled.a`
   align-items: center;
   font-weight: 900;
   font-size: 1rem;
-  opacity: 0.7;
   &:hover {
-    opacity: 1;
-    transition: all 0.5s;
-    svg {
+    ${AboutArrowSvg} {
       transform: translateX(0);
     }
   }
 `;
 const AboutRow = styled.div`
+  padding-top: 1em;
+  margin-top: 3em;
+  border-top: 1px solid;
+`;
+const AboutTextBox = styled.div`
   display: flex;
-  margin-top: 2em;
-  background-color: transparent;
-  background-size: 2em 2em;
-  background-image: repeating-linear-gradient(0deg, var(--color-blue), var(--color-blue) 1px, var(--color-bg) 1px, var(--color-bg));
+  align-items: center;
   font-size: 1.125rem;
   font-weight: 400;
   line-height: 2em;
-  svg {
-    transform: translateY(50%);
-  }
 `;
-const AboutRowParagraph = styled.p`
-  display: flex;
-  flex-direction: column;
-  padding-left: 1em;
+const AboutTextParagraph = styled.p`
+  margin-left: 0.5em;
 `;
 const AboutSmallText = styled.span`
   color: var(--color-grey);
   font-size: 0.7em;
+`;
+export const AboutSkillSpan = styled.span`
+  display: inline-block;
+  padding: 1em;
+  margin-right: 1em;
+  margin-bottom: 1em;
+  border-radius: 2em;
+  border: 1px solid;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
 `;
 
 export default function About() {
@@ -112,42 +128,53 @@ export default function About() {
           UI/UX를 깊이 고민하는 프론트엔드 개발자가 되고 싶습니다.
         </AboutDescParagraph>
         <AboutLink href='https://innseonn.notion.site/8bddbf58e5a34d4c99c1a1ff4c2e71c5' target='_blank'>
-          <AboutTextSpan>
-            <BsLink45Deg /> 이력서 확인하기
-          </AboutTextSpan>
-          <AboutTextBox>
+          <AboutLinkBox>
+            <AboutIconCircleBox>
+              <BsLink45Deg />
+            </AboutIconCircleBox>
+            <span>이력서 확인하기</span>
+          </AboutLinkBox>
+          <AboutIconBox>
             <AboutArrowSvg />
-          </AboutTextBox>
+          </AboutIconBox>
         </AboutLink>
       </AboutCol>
       <AboutCol col={2}>
         <div>
-          <AboutRow>
-            <BsTools />
-            <AboutRowParagraph>
-              <span>Javascript Typescript</span>
-              <span>React</span>
-              <span>HTML CSS SCSS Styled-Components</span>
-              <span>Git Github</span>
-            </AboutRowParagraph>
-          </AboutRow>
-          <AboutRow>
+          <p>
+            <AboutSkillSpan>Javascript</AboutSkillSpan>
+            <AboutSkillSpan>Typescript</AboutSkillSpan>
+            <AboutSkillSpan>React</AboutSkillSpan>
+          </p>
+          <p>
+            <AboutSkillSpan>HTML</AboutSkillSpan>
+            <AboutSkillSpan>CSS</AboutSkillSpan>
+            <AboutSkillSpan>SCSS</AboutSkillSpan>
+            <AboutSkillSpan>Styled-Components</AboutSkillSpan>
+          </p>
+          <p>
+            <AboutSkillSpan>Git</AboutSkillSpan>
+            <AboutSkillSpan>Github</AboutSkillSpan>
+          </p>
+        </div>
+        <AboutRow>
+          <AboutTextBox>
             <MdSchool />
-            <AboutRowParagraph>
+            <AboutTextParagraph>
               <span>
                 덕성여자대학교 IT미디어공학과 졸업 <AboutSmallText>2014.02.28 ~ 2019.02.19</AboutSmallText>
               </span>
-            </AboutRowParagraph>
-          </AboutRow>
-          <AboutRow>
+            </AboutTextParagraph>
+          </AboutTextBox>
+          <AboutTextBox>
             <GrCertificate />
-            <AboutRowParagraph>
+            <AboutTextParagraph>
               <span>
                 정보처리기사 <AboutSmallText>2017.08.04</AboutSmallText>
               </span>
-            </AboutRowParagraph>
-          </AboutRow>
-        </div>
+            </AboutTextParagraph>
+          </AboutTextBox>
+        </AboutRow>
       </AboutCol>
     </AboutLayout>
   );
