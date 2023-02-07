@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const HeaderLayout = styled.header`
   position: fixed;
   inset: 0 0 auto 0;
   padding: 20px var(--container-padding);
-  /* background-color: var(--color-bg); */
+  font-size: 1.25rem;
+  font-weight: bold;
+  font-family: 'Italiana';
+  text-transform: capitalize;
   z-index: 999;
 `;
 const HeaderNav = styled.nav`
@@ -22,26 +25,26 @@ const HeaderLogoBox = styled.div`
   height: 2em;
   border-radius: 50%;
   border: 1px solid var(--color-grey-light);
-  font-size: 1.25rem;
-  font-weight: bold;
-  font-family: 'Italiana';
 `;
-const HeaderList = styled.ul`
-  font-size: 1rem;
-  text-transform: capitalize;
-  letter-spacing: -0.03em;
-`;
-const HeaderItem = styled.li`
+const HeaderItem = styled.li<{ active: boolean }>`
   display: inline-block;
   padding: 0 1em;
+  color: var(--color-black);
+  opacity: 0.2;
+  transition: all 0.5s;
+  ${(props) =>
+    props.active &&
+    css`
+      opacity: 1;
+    `}
 `;
 
 export default function Header() {
   const location = useLocation();
-  const [isDisplay, setIsDisplay] = useState(false);
+  const [active, setActive] = useState('/');
 
   useEffect(() => {
-    location.pathname === '/' ? setIsDisplay(false) : setIsDisplay(true);
+    setActive(location.pathname);
   }, [location.pathname]);
 
   return (
@@ -50,18 +53,18 @@ export default function Header() {
         <HeaderLogoBox>
           <Link to='/'>Inn</Link>
         </HeaderLogoBox>
-        {isDisplay && (
-          <HeaderList>
-            <HeaderItem>
+        {active !== '/' && (
+          <ul>
+            <HeaderItem active={active === '/about'}>
               <Link to='/about'>about</Link>
             </HeaderItem>
-            <HeaderItem>
+            <HeaderItem active={active === '/projects'}>
               <Link to='/projects'>projects</Link>
             </HeaderItem>
-            <HeaderItem>
+            <HeaderItem active={active === '/contact'}>
               <Link to='/contact'>contact</Link>
             </HeaderItem>
-          </HeaderList>
+          </ul>
         )}
       </HeaderNav>
     </HeaderLayout>
