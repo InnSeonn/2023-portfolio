@@ -1,21 +1,17 @@
 import styled, { css } from 'styled-components';
 import { ProjectStoryType } from '../db/projectData';
+import { AboutSkillSpan } from '../pages/About';
 
 const ProjectStoryHeading = styled.h2`
   font-size: 1rem;
   font-weight: 700;
 `;
 const ProjectStoryLangPargraph = styled.p`
-  padding-top: 1em;
-  font-size: 0.875rem;
+  margin-bottom: 1em;
 `;
-const ProjectStoryLangSpan = styled.span`
-  display: inline-block;
+const ProjectStoryLangSpan = styled(AboutSkillSpan)`
   padding: 0.4em 0.8em;
-  margin: 0.5em 0.5em 0 0;
-  background-color: var(--color-black);
-  color: var(--color-bg);
-  letter-spacing: 0.06em;
+  margin-bottom: 0;
 `;
 const ProjectStoryDescBox = styled.div`
   visibility: hidden;
@@ -122,14 +118,16 @@ export default function ProjectStory({ item, active, setActive }: Props) {
   return (
     <ProjectStoryRow active={active.indexOf(item.id) >= 0}>
       <ProjectStoryHeading as='h4'>{item.title}</ProjectStoryHeading>
-      {item.lang && (
-        <ProjectStoryLangPargraph>
-          {item.lang.map((item, index) => (
-            <ProjectStoryLangSpan key={index}>{item}</ProjectStoryLangSpan>
-          ))}
-        </ProjectStoryLangPargraph>
-      )}
-      <ProjectStoryDescBox>{item.desc}</ProjectStoryDescBox>
+      <ProjectStoryDescBox>
+        {item.lang && (
+          <ProjectStoryLangPargraph>
+            {item.lang.map((item, index) => (
+              <ProjectStoryLangSpan key={index}>{item}</ProjectStoryLangSpan>
+            ))}
+          </ProjectStoryLangPargraph>
+        )}
+        {item.desc}
+      </ProjectStoryDescBox>
       <ProjectStoryButton data-id={item.id} onClick={handleActiveItem} />
     </ProjectStoryRow>
   );
