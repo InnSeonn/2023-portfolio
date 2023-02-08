@@ -2,12 +2,10 @@ import styled, { css } from 'styled-components';
 import { BsTools, BsArrowRight, BsLink45Deg } from 'react-icons/bs';
 import { MdSchool } from 'react-icons/md';
 import { GrCertificate } from 'react-icons/gr';
+import { Layout } from './Home';
 
-const AboutLayout = styled.section`
-  overflow: hidden;
+const AboutLayout = styled(Layout)`
   display: flex;
-  width: 100vw;
-  height: 100vh;
   background-color: var(--color-bg);
 `;
 const AboutCol = styled.div<{ col: number }>`

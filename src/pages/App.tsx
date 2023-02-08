@@ -1,6 +1,5 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import GlobalStyle from '../components/GlobalStyle';
 import Header from '../components/Header';
@@ -10,12 +9,12 @@ import Contact from './Contact';
 import Home from './Home';
 import ProjectPage from './ProjectPage';
 
-const AppLayout = styled.div<{ overflowY: string }>`
+const AppLayout = styled.div`
   overflow-x: hidden;
-  overflow-y: ${(props) => props.overflowY};
+  overflow-y: auto;
   position: relative;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   ::-webkit-scrollbar {
     width: 8px;
   }
@@ -29,22 +28,13 @@ const AppLayout = styled.div<{ overflowY: string }>`
 
 function App() {
   const location = useLocation();
-  const [overflowY, setOverflowY] = useState('hidden');
-
-  useEffect(() => {
-    if (location.pathname.includes('/projects/')) {
-      setOverflowY('visible');
-    } else {
-      setOverflowY('hidden');
-    }
-  }, [location.pathname]);
 
   return (
-    <AppLayout overflowY={overflowY} className='App'>
+    <AppLayout className='App'>
       <GlobalStyle />
       <Header />
       <TransitionGroup component={null}>
-        <CSSTransition key={location.pathname} timeout={500} classNames={location.pathname.includes('/projects/') ? 'slide' : 'bounce'}>
+        <CSSTransition key={location.pathname} timeout={500} classNames={location.pathname.includes('/projects/') ? 'slide' : location.pathname === '/' ? '' : 'bounce'}>
           <Routes location={location}>
             <Route path='/' element={<Home />}></Route>
             <Route path='/about' element={<About />}></Route>

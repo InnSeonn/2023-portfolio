@@ -1,16 +1,15 @@
 import styled from 'styled-components';
 import { ani } from '../components/GlobalStyle';
 import { RiArrowRightUpLine } from 'react-icons/ri';
+import { Layout } from './Home';
 
-const ContactLayout = styled.section`
-  width: 100vw;
-  height: 100vh;
+const ContactLayout = styled(Layout)`
+  display: flex;
   background-color: var(--color-bg);
 `;
 const ContactBox = styled.div`
   display: flex;
   width: 100%;
-  height: 100%;
 `;
 const ContactRow = styled.div`
   width: 25%;

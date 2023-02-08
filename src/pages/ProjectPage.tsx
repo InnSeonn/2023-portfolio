@@ -3,14 +3,11 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Pagination from '../components/Pagination';
 import Project from '../components/Project';
 import projectData from '../db/projectData';
+import { Layout } from './Home';
 
-const ProjectPageLayout = styled.section`
-  position: absolute;
+const ProjectPageLayout = styled(Layout)`
   display: flex;
-  width: 100vw;
-  height: 100vh;
   background-color: #fff;
-  z-index: 10; //페이지 전환 시 absolute 인해 겹치지 않도록
 `;
 const ProjectPageCol = styled.div<{ col: number }>`
   ${(props) =>

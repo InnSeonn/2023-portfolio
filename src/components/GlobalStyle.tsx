@@ -13,6 +13,21 @@ const bounceAnimation = css`
 `;
 const pageTransition = css`
   /* bounce */
+  .bounce-enter,
+  .bounce-enter-active {
+    height: 100vh;
+    z-index: 90;
+  }
+  .bounce-enter-done {
+    height: auto;
+  }
+  .bounce-exit,
+  .bounce-exit-active,
+  .bounce-exit-done {
+    height: 100vh;
+    z-index: 0;
+  }
+
   .bounce-enter > div,
   .bounce-enter-active > div,
   .bounce-enter-done > div {

@@ -5,14 +5,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { BsLink45Deg } from 'react-icons/bs';
 import projectData from '../db/projectData';
 import ProjectStory from '../components/ProjectStory';
+import { Layout } from './Home';
 
-const ProjectDetailLayout = styled.article`
-  position: absolute;
+const ProjectDetailLayout = styled(Layout)`
   top: 0;
   left: 0;
   display: flex;
-  min-width: 100%;
-  min-height: 100%;
   background-color: var(--color-bg);
   transition: all 0.5s;
   z-index: 9999;
@@ -100,7 +98,7 @@ export default function ProjectDetail() {
   };
 
   return (
-    <ProjectDetailLayout ref={layoutRef}>
+    <ProjectDetailLayout as='article' ref={layoutRef}>
       <ProjectDetailCol col={1}>
         <ProjectDetailHeader>
           <nav>

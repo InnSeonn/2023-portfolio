@@ -5,11 +5,14 @@ import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ani } from '../components/GlobalStyle';
 
-const HomeLayout = styled.section`
+export const Layout = styled.section`
   overflow: hidden;
-  display: flex;
+  position: absolute;
+  min-height: 100vh;
   width: 100vw;
-  height: 100vh;
+`;
+const HomeLayout = styled(Layout)`
+  display: flex;
   background-color: var(--color-bg);
   font-family: 'Italiana';
 `;
