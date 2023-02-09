@@ -6,10 +6,8 @@ const HeaderLayout = styled.header`
   position: fixed;
   inset: 0 0 auto 0;
   padding: 20px var(--container-padding);
+  text-transform: lowercase;
   font-size: 1.25rem;
-  font-weight: bold;
-  font-family: 'Italiana';
-  text-transform: capitalize;
   z-index: 999;
 `;
 const HeaderNav = styled.nav`
@@ -25,17 +23,41 @@ const HeaderLogoBox = styled.div`
   height: 2em;
   border-radius: 50%;
   border: 1px solid var(--color-grey-light);
+  font-weight: 700;
+  a {
+    letter-spacing: -0.13em;
+  }
 `;
 const HeaderItem = styled.li<{ active: boolean }>`
+  position: relative;
   display: inline-block;
-  padding: 0 1em;
-  color: var(--color-black);
+  margin: 0 1em;
+  font-weight: 500;
   opacity: 0.2;
   transition: all 0.5s;
+  &::after {
+    position: absolute;
+    bottom: 1px;
+    left: 0;
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-black);
+    transition: all 0.5s;
+    content: '';
+  }
+  &:hover {
+    &::after {
+      width: 100%;
+    }
+  }
   ${(props) =>
     props.active &&
     css`
       opacity: 1;
+      &::after {
+        width: 100%;
+      }
     `}
 `;
 
