@@ -9,7 +9,7 @@ const bounceAnimation = css`
     0% {opacity: 0; transform: translateY(0px)}
     50% {transform: translateY(-20px)}
     100% {opacity: 1; transform: translateY(0px)}
-  `)} 1s cubic-bezier(0.46, 0.03, 0.31, 1.03) both;
+  `)} 1s cubic-bezier(0.46, 0.03, 0.31, 1.03) 0.2s both;
 `;
 const pageTransition = css`
   /* bounce */
@@ -17,21 +17,25 @@ const pageTransition = css`
   .bounce-enter-active {
     height: 100vh;
     z-index: 90;
+    & > div {
+      ${bounceAnimation}
+    }
   }
   .bounce-enter-done {
     height: auto;
+    & > div {
+      ${bounceAnimation}
+    }
   }
-  .bounce-exit,
+  .bounce-exit {
+    opacity: 1;
+  }
   .bounce-exit-active,
   .bounce-exit-done {
     height: 100vh;
-    z-index: 0;
-  }
-
-  .bounce-enter > div,
-  .bounce-enter-active > div,
-  .bounce-enter-done > div {
-    ${bounceAnimation}
+    opacity: 0;
+    z-index: 100;
+    transition: all 0.3s;
   }
 
   /* slide */
@@ -46,6 +50,16 @@ const pageTransition = css`
   .slide-exit-active,
   .slide-exit-done {
     transform: translateY(100%);
+  }
+
+  /* page */
+  .page-exit {
+    clip-path: inset(0 0 0 0);
+  }
+  .page-exit-active {
+    clip-path: inset(0 100% 0 0);
+    z-index: 100;
+    transition: all 0.8s;
   }
 `;
 

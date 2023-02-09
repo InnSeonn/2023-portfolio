@@ -34,7 +34,7 @@ function App() {
       <GlobalStyle />
       <Header />
       <TransitionGroup component={null}>
-        <CSSTransition key={location.pathname} timeout={500} classNames={location.pathname.includes('/projects/') ? 'slide' : location.pathname === '/' ? '' : 'bounce'}>
+        <CSSTransition key={location.pathname} timeout={500} classNames={location.pathname.includes('/projects/') ? 'slide' : location.pathname === '/' ? 'page' : 'bounce'}>
           <Routes location={location}>
             <Route path='/' element={<Home />}></Route>
             <Route path='/about' element={<About />}></Route>
