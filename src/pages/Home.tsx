@@ -21,7 +21,7 @@ const HomeBox = styled.div`
 `;
 const HomeTitleBox = styled.div`
   padding-right: 2em;
-  border-right: 1px solid #12121280;
+  border-right: 1px solid #12121230;
   font-size: 7rem;
   font-weight: 900;
   text-align: center;
@@ -46,6 +46,13 @@ const HomeParagraph = styled.p<{ order: number; content: string }>`
     clip-path: inset(100% 0 0 0);
     animation: ${ani(`to{clip-path: inset(0 0 0 0)}`)} 2s ${(props) => 1 + props.order * 0.3}s forwards;
     content: '${(props) => props.content}';
+  }
+  &::after {
+    color: transparent;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/5/5c/Image_gaussian_noise_example.png');
+    -webkit-background-clip: text;
+    background-clip: text;
+    opacity: 0.3;
   }
 `;
 const HomeNavList = styled.ul`
