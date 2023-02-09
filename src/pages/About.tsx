@@ -1,21 +1,23 @@
 import styled, { css } from 'styled-components';
-import { BsTools, BsArrowRight, BsLink45Deg } from 'react-icons/bs';
+import { BsArrowRight, BsLink45Deg } from 'react-icons/bs';
 import { MdSchool } from 'react-icons/md';
 import { GrCertificate } from 'react-icons/gr';
 import { Layout } from './Home';
 
 const AboutLayout = styled(Layout)`
   display: flex;
+  justify-content: center;
+  padding: 0 calc(var(--container-padding) * 2);
   background-color: var(--color-bg);
 `;
 const AboutCol = styled.div<{ col: number }>`
-  margin: calc(var(--container-padding) * 3) 0;
-  padding: 0 var(--container-padding);
   ${(props) =>
     (props.col === 1 &&
       css`
-        width: 55%;
+        align-self: center;
+        padding-right: 10%;
         border-right: 1px solid var(--color-grey-light);
+        text-align: center;
       `) ||
     (props.col === 2 &&
       css`
@@ -23,6 +25,8 @@ const AboutCol = styled.div<{ col: number }>`
         flex-direction: column;
         justify-content: flex-end;
         align-items: flex-start;
+        padding-left: var(--container-padding);
+        margin-bottom: calc(var(--container-padding) * 3);
       `)}
 `;
 const AboutTitleParagraph = styled.p`
