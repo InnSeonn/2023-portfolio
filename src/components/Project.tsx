@@ -75,7 +75,9 @@ const ProjectItem = styled.li<{ active: boolean }>`
   flex-shrink: 0;
   width: 15%;
   max-width: 900px;
-  margin-right: 40px;
+  &:not(:last-child) {
+    margin-right: 40px;
+  }
   transition: width 0.5s;
   ${(props) =>
     props.active &&

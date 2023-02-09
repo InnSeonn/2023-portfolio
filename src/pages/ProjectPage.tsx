@@ -7,6 +7,8 @@ import { Layout } from './Home';
 
 const ProjectPageLayout = styled(Layout)`
   display: flex;
+  justify-content: center;
+  padding: 0 calc(var(--container-padding) * 2);
   background-color: #fff;
 `;
 const ProjectPageCol = styled.div<{ col: number }>`
@@ -17,7 +19,6 @@ const ProjectPageCol = styled.div<{ col: number }>`
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-end;
-        width: 20%;
         margin: calc(var(--container-padding) * 3) 0;
         padding: 0 var(--container-padding);
         border-right: 1px solid var(--color-grey-light);
@@ -28,7 +29,6 @@ const ProjectPageCol = styled.div<{ col: number }>`
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        width: 80%;
         margin: calc(var(--container-padding) * 3) var(--container-padding);
       `)}
 `;
@@ -42,7 +42,7 @@ const ProjectPageSlideBox = styled.div`
 `;
 const ProjectPageSlideList = styled.ul`
   display: flex;
-  width: 100%;
+  width: 73vw;
   transition: all 0.5s;
 `;
 
