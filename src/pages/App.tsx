@@ -15,6 +15,7 @@ const AppLayout = styled.div`
   position: relative;
   width: 100vw;
   min-height: 100vh;
+  background-color: var(--color-bg);
   ::-webkit-scrollbar {
     width: 8px;
   }

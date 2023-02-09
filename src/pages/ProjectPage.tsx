@@ -8,8 +8,6 @@ import { Layout } from './Home';
 const ProjectPageLayout = styled(Layout)`
   display: flex;
   justify-content: center;
-  padding: 0 calc(var(--container-padding) * 2);
-  background-color: #fff;
 `;
 const ProjectPageCol = styled.div<{ col: number }>`
   ${(props) =>

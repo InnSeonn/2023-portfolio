@@ -8,12 +8,13 @@ export const Layout = styled.section`
   position: absolute;
   min-height: 100vh;
   width: 100vw;
+  padding: calc(var(--container-padding) * 2) var(--container-padding);
+  background-color: var(--color-bg);
 `;
 const HomeLayout = styled(Layout)`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--color-bg);
 `;
 const HomeBox = styled.div`
   display: flex;

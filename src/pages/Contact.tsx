@@ -5,7 +5,7 @@ import { Layout } from './Home';
 
 const ContactLayout = styled(Layout)`
   display: flex;
-  background-color: var(--color-bg);
+  padding: 0;
 `;
 const ContactBox = styled.div`
   display: flex;

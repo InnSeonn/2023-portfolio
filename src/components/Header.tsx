@@ -9,6 +9,7 @@ const HeaderLayout = styled.header`
   text-transform: lowercase;
   font-size: 1.25rem;
   z-index: 999;
+  background-color: var(--color-bg);
 `;
 const HeaderNav = styled.nav`
   display: flex;

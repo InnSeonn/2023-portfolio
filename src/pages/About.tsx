@@ -7,8 +7,6 @@ import { Layout } from './Home';
 const AboutLayout = styled(Layout)`
   display: flex;
   justify-content: center;
-  padding: 0 calc(var(--container-padding) * 2);
-  background-color: var(--color-bg);
 `;
 const AboutCol = styled.div<{ col: number }>`
   ${(props) =>
@@ -26,7 +24,7 @@ const AboutCol = styled.div<{ col: number }>`
         justify-content: flex-end;
         align-items: flex-start;
         padding-left: var(--container-padding);
-        margin-bottom: calc(var(--container-padding) * 3);
+        margin-bottom: calc(var(--container-padding) * 1);
       `)}
 `;
 const AboutTitleParagraph = styled.p`
