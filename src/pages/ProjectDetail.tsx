@@ -5,12 +5,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { BsLink45Deg } from 'react-icons/bs';
 import projectData from '../db/projectData';
 import ProjectStory from '../components/ProjectStory';
-import { Layout } from './Home';
 
-const ProjectDetailLayout = styled(Layout)`
+const ProjectDetailLayout = styled.article`
+  position: absolute;
   top: 0;
   left: 0;
   display: flex;
+  width: 100vw;
+  min-height: 100vh;
   background-color: var(--color-bg);
   transition: all 0.5s;
   z-index: 9999;
@@ -27,9 +29,11 @@ const ProjectDetailCol = styled.div<{ col: number }>`
         border-left: 1px solid var(--color-grey-light);
       `)}
 `;
-const ProjectDetailHeader = styled.header`
+const ProjectStickyBox = styled.div`
   position: sticky;
   top: 0;
+`;
+const ProjectDetailHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -63,8 +67,6 @@ const ProjectDetailLink = styled.a.attrs({ target: '_blank' })`
 
 const ProjectDetailImgBox = styled.div<{ active: boolean }>`
   overflow: hidden;
-  position: sticky;
-  top: 25%;
   padding: var(--container-padding);
   img {
     visibility: hidden;
@@ -100,25 +102,27 @@ export default function ProjectDetail() {
   return (
     <ProjectDetailLayout id='detail' ref={layoutRef}>
       <ProjectDetailCol col={1}>
-        <ProjectDetailHeader>
-          <nav>
-            <ProjectDetailButton onClick={backToPage}>
-              <BsArrowUp />
-            </ProjectDetailButton>
-          </nav>
-          <ProjectDetailHeading>{data.current?.name}</ProjectDetailHeading>
-          <ProjectDetailLinkBox>
-            <ProjectDetailLink href={data.current?.github}>
-              <BsLink45Deg /> readme
-            </ProjectDetailLink>
-            <ProjectDetailLink href={data.current?.website}>
-              <BsLink45Deg /> website
-            </ProjectDetailLink>
-          </ProjectDetailLinkBox>
-        </ProjectDetailHeader>
-        <ProjectDetailImgBox active={active.length > 0}>
-          <img src={data.current?.img}></img>
-        </ProjectDetailImgBox>
+        <ProjectStickyBox>
+          <ProjectDetailHeader>
+            <nav>
+              <ProjectDetailButton onClick={backToPage}>
+                <BsArrowUp />
+              </ProjectDetailButton>
+            </nav>
+            <ProjectDetailHeading>{data.current?.name}</ProjectDetailHeading>
+            <ProjectDetailLinkBox>
+              <ProjectDetailLink href={data.current?.github}>
+                <BsLink45Deg /> readme
+              </ProjectDetailLink>
+              <ProjectDetailLink href={data.current?.website}>
+                <BsLink45Deg /> website
+              </ProjectDetailLink>
+            </ProjectDetailLinkBox>
+          </ProjectDetailHeader>
+          <ProjectDetailImgBox active={active.length > 0}>
+            <img src={data.current?.img}></img>
+          </ProjectDetailImgBox>
+        </ProjectStickyBox>
       </ProjectDetailCol>
       <ProjectDetailCol col={2}>
         {data.current?.story.map((item) => (
