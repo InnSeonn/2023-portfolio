@@ -51,6 +51,15 @@ export default function ProjectPage() {
   const startX = useRef(0);
   const transformX = useRef(0);
   const [page, setPage] = useState(0);
+  const layoutRef = useRef<HTMLElement>(null);
+  const bounceRef = useRef<(null | HTMLDivElement)[]>([null]);
+
+  useEffect(() => {
+    //projectDetail 페이지와의 전환 시 애니메이션 적용 안함
+    if (document.getElementById('detail') && layoutRef.current?.className.includes('bounce-enter')) {
+      bounceRef.current.map((elem) => elem && (elem.style.animation = 'none'));
+    }
+  }, [layoutRef.current?.className]);
 
   useEffect(() => {
     if (listRef.current === null) return;
@@ -94,15 +103,15 @@ export default function ProjectPage() {
   }, []);
 
   return (
-    <ProjectPageLayout>
-      <ProjectPageCol col={1}>
+    <ProjectPageLayout ref={layoutRef}>
+      <ProjectPageCol col={1} ref={(elem) => (bounceRef.current[0] = elem)}>
         <ul>
           {projectItem.current.map((elem, index) => (
             <Pagination key={index} id={index} page={page} setPage={setPage} />
           ))}
         </ul>
       </ProjectPageCol>
-      <ProjectPageCol col={2}>
+      <ProjectPageCol col={2} ref={(elem) => (bounceRef.current[1] = elem)}>
         <ProjectPageSlideBox draggable='false' ref={slideRef} onMouseDown={mouseEventHandler}>
           <ProjectPageSlideList ref={listRef}>
             {projectItem.current.map((elem) => (

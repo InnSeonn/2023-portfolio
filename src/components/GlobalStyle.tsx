@@ -41,6 +41,12 @@ const pageTransition = css`
   /* slide */
   .slide-enter {
     transform: translateY(100%);
+    //projectDetail 페이지와의 전환 시 애니메이션 적용 안함
+    + .bounce-exit,
+    + .bounce-exit-active,
+    + .bounce-exit-done {
+      opacity: 1;
+    }
   }
   .slide-enter-active,
   .slide-enter-done {

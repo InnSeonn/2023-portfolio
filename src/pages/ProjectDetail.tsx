@@ -98,7 +98,7 @@ export default function ProjectDetail() {
   };
 
   return (
-    <ProjectDetailLayout as='article' ref={layoutRef}>
+    <ProjectDetailLayout id='detail' ref={layoutRef}>
       <ProjectDetailCol col={1}>
         <ProjectDetailHeader>
           <nav>
