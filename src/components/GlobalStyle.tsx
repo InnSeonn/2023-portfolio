@@ -9,20 +9,22 @@ const bounceAnimation = css`
     0% {opacity: 0; transform: translateY(0px)}
     50% {transform: translateY(-20px)}
     100% {opacity: 1; transform: translateY(0px)}
-  `)} 1s cubic-bezier(0.46, 0.03, 0.31, 1.03) 0.2s both;
+  `)} 1s cubic-bezier(0.46, 0.03, 0.31, 1.03) both;
 `;
 const pageTransition = css`
   /* bounce */
-  .bounce-enter,
+  .bounce-enter {
+    opacity: 0;
+  }
   .bounce-enter-active {
-    height: 100vh;
-    z-index: 90;
+    opacity: 1;
+    transition: all 0.5s;
+    z-index: 100;
     & > div {
       ${bounceAnimation}
     }
   }
   .bounce-enter-done {
-    height: auto;
     & > div {
       ${bounceAnimation}
     }
@@ -32,16 +34,14 @@ const pageTransition = css`
   }
   .bounce-exit-active,
   .bounce-exit-done {
-    height: 100vh;
     opacity: 0;
-    z-index: 100;
-    transition: all 0.3s;
+    transition: all 0.5s;
   }
 
   /* slide */
   .slide-enter {
     transform: translateY(100%);
-    //projectDetail 페이지와의 전환 시 애니메이션 적용 안함
+    //projectDetail 페이지와의 전환 시 투명도 유지
     + .bounce-exit,
     + .bounce-exit-active,
     + .bounce-exit-done {
@@ -59,13 +59,18 @@ const pageTransition = css`
   }
 
   /* page */
+  .page-enter,
+  .page-enter-active {
+    z-index: 101;
+  }
   .page-exit {
     clip-path: inset(0 0 0 0);
   }
-  .page-exit-active {
+  .page-exit-active,
+  .page-exit-done {
     clip-path: inset(0 100% 0 0);
-    z-index: 100;
-    transition: all 0.8s;
+    transition: all 0.5s;
+    z-index: 101;
   }
 `;
 
@@ -79,6 +84,8 @@ const Variables = css`
     --color-grey-light: #e8ebf1;
     --color-grey: #9fa1a7;
     --color-blue: #acc8e3;
+
+    background-color: var(--color-bg);
   }
 `;
 
@@ -90,6 +97,16 @@ const GlobalStyle = createGlobalStyle`
 	* {
 		box-sizing: border-box;
 		letter-spacing: -0.03em;
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #000;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--color-bg);
+    }
 	}
 	body {
 		color: var(--color-black);

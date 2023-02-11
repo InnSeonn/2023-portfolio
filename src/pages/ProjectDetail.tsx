@@ -11,7 +11,7 @@ const ProjectDetailLayout = styled.article`
   top: 0;
   left: 0;
   display: flex;
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   background-color: var(--color-bg);
   transition: all 0.5s;

@@ -10,21 +10,8 @@ import Home from './Home';
 import ProjectPage from './ProjectPage';
 
 const AppLayout = styled.div`
-  overflow-x: hidden;
-  overflow-y: auto;
   position: relative;
-  width: 100vw;
-  min-height: 100vh;
   background-color: var(--color-bg);
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #000;
-  }
-  ::-webkit-scrollbar-track {
-    background: var(--color-bg);
-  }
 `;
 
 function App() {

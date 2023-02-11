@@ -4,10 +4,11 @@ import { ani } from '../components/GlobalStyle';
 import { TfiArrowRight } from 'react-icons/tfi';
 
 export const Layout = styled.section`
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   position: absolute;
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
   padding: calc(var(--container-padding) * 2) var(--container-padding);
   background-color: var(--color-bg);
 `;

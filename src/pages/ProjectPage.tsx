@@ -17,7 +17,7 @@ const ProjectPageCol = styled.div<{ col: number }>`
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-end;
-        margin: calc(var(--container-padding) * 3) 0;
+        margin: 4.2vh 0;
         padding: 0 var(--container-padding);
         border-right: 1px solid var(--color-grey-light);
         text-align: right;
@@ -27,7 +27,7 @@ const ProjectPageCol = styled.div<{ col: number }>`
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        margin: calc(var(--container-padding) * 3) var(--container-padding);
+        margin: 4.2vh var(--container-padding);
       `)}
 `;
 const ProjectPageSlideBox = styled.div`
