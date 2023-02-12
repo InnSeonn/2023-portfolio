@@ -52,7 +52,7 @@ const ProjectPageSlideBox = styled.div`
   &.drag {
     cursor: grabbing;
     ${ProjectPageSlideList} {
-      transition: transform 0.1s;
+      transition: none;
     }
   }
   @media screen and (max-width: 768px) {
@@ -101,31 +101,40 @@ export default function ProjectPage() {
     startX.current = transformX.current + e.clientX;
     slideRef.current?.addEventListener('mouseup', clearEventHandler);
     slideRef.current?.addEventListener('mouseleave', clearEventHandler);
-    slideRef.current?.addEventListener('mousemove', handleMouseMove);
+    slideRef.current?.addEventListener('mousemove', handleSlideMove);
   };
 
-  const handleMouseMove = useCallback((e: Event) => {
+  const handleSlideMove = useCallback((e: Event) => {
     if (listRef.current === null) return;
-    if (e instanceof MouseEvent) {
-      slideRef.current?.classList.add('drag');
-      const moveX = startX.current - e.clientX;
-      if (moveX < 0) {
-        transformX.current = 0;
-      } else if (moveX > listRef.current.scrollWidth - listRef.current.offsetWidth) {
-        transformX.current = listRef.current.scrollWidth - listRef.current.offsetWidth;
-      } else {
-        transformX.current = startX.current - e.clientX;
-      }
-      listRef.current.style.transform = `translateX(-${transformX.current}px)`;
+    slideRef.current?.classList.add('drag');
+    const moveX = e instanceof MouseEvent ? startX.current - e.clientX : e instanceof TouchEvent ? startX.current - e.touches[0].pageX : 0;
+    if (moveX < 0) {
+      transformX.current = 0;
+    } else if (moveX > listRef.current.scrollWidth - listRef.current.offsetWidth) {
+      transformX.current = listRef.current.scrollWidth - listRef.current.offsetWidth;
+    } else {
+      transformX.current = moveX;
     }
+    listRef.current.style.transform = `translateX(-${transformX.current}px)`;
   }, []);
 
   const clearEventHandler = useCallback((e: Event) => {
     slideRef.current?.classList.remove('drag');
-    slideRef.current?.removeEventListener('mouseup', clearEventHandler);
-    slideRef.current?.removeEventListener('mouseleave', clearEventHandler);
-    slideRef.current?.removeEventListener('mousemove', handleMouseMove);
+    if (e.type === 'mouseup') {
+      slideRef.current?.removeEventListener('mouseup', clearEventHandler);
+      slideRef.current?.removeEventListener('mouseleave', clearEventHandler);
+      slideRef.current?.removeEventListener('mousemove', handleSlideMove);
+    } else if (e.type === 'touchend') {
+      slideRef.current?.removeEventListener('touchend', clearEventHandler);
+      slideRef.current?.removeEventListener('touchmove', handleSlideMove);
+    }
   }, []);
+
+  const touchEventHandler = (e: React.TouchEvent) => {
+    startX.current = transformX.current + e.touches[0].pageX;
+    slideRef.current?.addEventListener('touchend', clearEventHandler);
+    slideRef.current?.addEventListener('touchmove', handleSlideMove);
+  };
 
   return (
     <ProjectPageLayout ref={layoutRef}>
@@ -137,7 +146,7 @@ export default function ProjectPage() {
         </ul>
       </ProjectPageCol>
       <ProjectPageCol col={2} ref={(elem) => (bounceRef.current[1] = elem)}>
-        <ProjectPageSlideBox draggable='false' ref={slideRef} onMouseDown={matches ? undefined : mouseEventHandler}>
+        <ProjectPageSlideBox draggable='false' ref={slideRef} onMouseDown={matches ? undefined : mouseEventHandler} onTouchStart={matches ? undefined : touchEventHandler}>
           <ProjectPageSlideList ref={listRef}>
             {projectItem.current.map((elem) => (
               <Project key={elem.id} item={elem} page={page} setPage={setPage} />
