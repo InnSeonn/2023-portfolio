@@ -5,17 +5,30 @@ import { Layout } from './Home';
 
 const ContactLayout = styled(Layout)`
   display: flex;
-  padding: 0;
+  padding: calc(var(--container-padding) * 2) 0 0;
 `;
 const ContactBox = styled.div`
   display: flex;
   width: 100%;
+  @media screen and (max-width: 992px) {
+    flex-direction: column;
+  }
 `;
 const ContactRow = styled.div`
   width: 25%;
-  border-left: 1px solid var(--color-grey-light);
+  border-style: none none none solid;
+  border-width: 1px;
+  border-color: var(--color-grey-light);
   &:first-child {
     border-left: none;
+  }
+  @media screen and (max-width: 992px) {
+    width: 100%;
+    height: 25%;
+    border-style: none none solid;
+    &:first-child {
+      border-style: solid none solid;
+    }
   }
 `;
 const ContactTextBox = styled.div`
@@ -33,18 +46,27 @@ const ContactBottomText = styled.span`
   font-weight: 100;
 `;
 const ContactParagraph = styled.p`
+  position: relative;
   padding-bottom: 2em;
   font-size: 4vw;
   font-weight: 700;
+  z-index: 1;
+  @media screen and (max-width: 992px) {
+    padding-bottom: 0.5em;
+    font-size: 10vw;
+  }
 `;
 const ContactSmallText = styled.span`
   display: block;
   padding: 0.2em 0;
-  font-size: 2.5vw;
+  font-size: 0.625em;
   font-weight: 100;
 `;
 const ContactIcon = styled.div`
   visibility: hidden;
+  position: absolute;
+  right: var(--container-padding);
+  bottom: 40%;
   margin: 0 auto;
   font-size: 17vw;
   opacity: 0;
@@ -56,6 +78,16 @@ const ContactIcon = styled.div`
   }
   path {
     stroke: url(#blueYellowGradient);
+  }
+  @media (hover: none) and (pointer: coarse) {
+    visibility: visible;
+    opacity: 1;
+    animation: ${ani(`to{transform: translate(10%, -10%)}`)} 0.5s alternate infinite;
+  }
+  @media screen and (max-width: 576px) {
+    top: calc(var(--container-padding) / 2);
+    right: calc(var(--container-padding) / 2);
+    bottom: auto;
   }
 `;
 const ContactLink = styled(ContactTextBox).attrs({ target: '_blank' })`
@@ -69,16 +101,25 @@ const ContactLink = styled(ContactTextBox).attrs({ target: '_blank' })`
     opacity: 0;
     content: '';
   }
-  &:hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: var(--color-black);
+      color: var(--color-bg);
+      &::after {
+        opacity: 0.15;
+      }
+      ${ContactIcon} {
+        visibility: visible;
+        opacity: 1;
+        animation: ${ani(`to{transform: translate(10%, -10%)}`)} 0.5s alternate infinite;
+      }
+    }
+  }
+  @media (hover: none) and (pointer: coarse) {
     background-color: var(--color-black);
     color: var(--color-bg);
     &::after {
       opacity: 0.15;
-    }
-    ${ContactIcon} {
-      visibility: visible;
-      opacity: 1;
-      animation: ${ani(`to{transform: translate(40px, -40px)}`)} 0.5s alternate infinite;
     }
   }
 `;

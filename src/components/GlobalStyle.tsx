@@ -40,7 +40,7 @@ const pageTransition = css`
 
   /* slide */
   .slide-enter {
-    transform: translateY(100%);
+    transform: translateY(100vh);
     //projectDetail 페이지와의 전환 시 투명도 유지
     + .bounce-exit,
     + .bounce-exit-active,
@@ -55,7 +55,7 @@ const pageTransition = css`
   .slide-exit,
   .slide-exit-active,
   .slide-exit-done {
-    transform: translateY(100%);
+    transform: translateY(100vh);
   }
 
   /* page */
@@ -78,7 +78,6 @@ const Variables = css`
   :root {
     --container-padding: 40px;
 
-    /* --color-bg: #fcfdff; */
     --color-bg: #f3f5f9;
     --color-black: #121212;
     --color-grey-light: #e8ebf1;
@@ -112,6 +111,7 @@ const GlobalStyle = createGlobalStyle`
 		color: var(--color-black);
 		font-weight: 300;
 		font-family: 'SUIT';
+    word-break: keep-all;
 	}
 	a {
 		color: inherit;

@@ -12,6 +12,11 @@ import ProjectPage from './ProjectPage';
 const AppLayout = styled.div`
   position: relative;
   background-color: var(--color-bg);
+  &.full {
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+  }
 `;
 
 function App() {

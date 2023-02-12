@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 import { ProjectStoryType } from '../db/projectData';
-import { AboutSkillSpan } from '../pages/About';
 
 const ProjectStoryHeading = styled.h2`
   font-size: 1rem;
@@ -8,10 +7,17 @@ const ProjectStoryHeading = styled.h2`
 `;
 const ProjectStoryLangPargraph = styled.p`
   margin-bottom: 1em;
+  line-height: 1;
 `;
-const ProjectStoryLangSpan = styled(AboutSkillSpan)`
-  padding: 0.4em 0.8em;
-  margin-bottom: 0;
+const ProjectStoryLangSpan = styled.span`
+  display: inline-block;
+  padding: 0.9em;
+  margin: 0 1em 1em 0;
+  border-radius: 2em;
+  border: 1px solid;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
 `;
 const ProjectStoryDescBox = styled.div`
   visibility: hidden;
@@ -60,6 +66,10 @@ const ProjectStoryButton = styled.button`
       transform: translate(50%, -50%) rotate(90deg);
     }
   }
+  @media screen and (max-width: 992px) {
+    width: 14vw;
+    height: 14vw;
+  }
 `;
 const ProjectStoryRow = styled.div<{ active: boolean }>`
   position: relative;
@@ -83,6 +93,9 @@ const ProjectStoryRow = styled.div<{ active: boolean }>`
           &::before {
             transform: none;
           }
+        }
+        @media screen and (max-width: 992px) {
+          width: 5vw;
         }
       }
       ${ProjectStoryDescBox} {

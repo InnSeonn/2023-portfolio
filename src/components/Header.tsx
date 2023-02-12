@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
+import { VscMenu } from 'react-icons/vsc';
+import FullNav from './FullNav';
 
 const HeaderLayout = styled.header`
   position: fixed;
@@ -61,35 +63,62 @@ const HeaderItem = styled.li<{ active: boolean }>`
       }
     `}
 `;
+const HeaderButton = styled.button`
+  width: 1.75rem;
+  height: 1.75rem;
+  font-size: 1.75rem;
+`;
 
 export default function Header() {
   const location = useLocation();
   const [active, setActive] = useState('/');
+  const [matches, setIsMatches] = useState(window.matchMedia('(max-width: 576px)').matches);
+  const [fullNav, setFullNav] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener('resize', setMatchMedia);
+  }, []);
 
   useEffect(() => {
     setActive(location.pathname);
   }, [location.pathname]);
 
+  const setMatchMedia = (e: Event) => {
+    setIsMatches(window.matchMedia('(max-width: 576px)').matches);
+  };
+
+  const setDisplayFullNav = (e: React.MouseEvent) => {
+    setFullNav(true);
+  };
+
   return (
-    <HeaderLayout>
-      <HeaderNav>
-        <HeaderLogoBox>
-          <Link to='/'>Inn</Link>
-        </HeaderLogoBox>
-        {active !== '/' && (
-          <ul>
-            <HeaderItem active={active === '/about'}>
-              <Link to='/about'>about</Link>
-            </HeaderItem>
-            <HeaderItem active={active === '/projects'}>
-              <Link to='/projects'>projects</Link>
-            </HeaderItem>
-            <HeaderItem active={active === '/contact'}>
-              <Link to='/contact'>contact</Link>
-            </HeaderItem>
-          </ul>
-        )}
-      </HeaderNav>
-    </HeaderLayout>
+    <>
+      <HeaderLayout>
+        <HeaderNav>
+          <HeaderLogoBox>
+            <Link to='/'>Inn</Link>
+          </HeaderLogoBox>
+          {(active !== '/' && !matches && (
+            <ul>
+              <HeaderItem active={active === '/about'}>
+                <Link to='/about'>about</Link>
+              </HeaderItem>
+              <HeaderItem active={active === '/projects'}>
+                <Link to='/projects'>projects</Link>
+              </HeaderItem>
+              <HeaderItem active={active === '/contact'}>
+                <Link to='/contact'>contact</Link>
+              </HeaderItem>
+            </ul>
+          )) ||
+            (active !== '/' && matches && (
+              <HeaderButton onClick={setDisplayFullNav}>
+                <VscMenu />
+              </HeaderButton>
+            ))}
+        </HeaderNav>
+      </HeaderLayout>
+      {fullNav && <FullNav setFullNav={setFullNav} />}
+    </>
   );
 }

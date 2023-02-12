@@ -9,7 +9,7 @@ export const Layout = styled.section`
   position: absolute;
   min-height: 100vh;
   width: 100%;
-  padding: calc(var(--container-padding) * 2) var(--container-padding);
+  padding: calc(var(--container-padding) * 3) var(--container-padding) var(--container-padding);
   background-color: var(--color-bg);
 `;
 const HomeLayout = styled(Layout)`
@@ -20,16 +20,33 @@ const HomeLayout = styled(Layout)`
 const HomeBox = styled.div`
   display: flex;
   align-items: flex-end;
+  @media screen and (max-width: 992px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 const HomeTitleBox = styled.div`
-  padding-right: 2em;
-  border-right: 1px solid #12121230;
+  padding: 0 2em 0 0;
+  border-style: none solid none none;
+  border-width: 1px;
+  border-color: #12121230;
   font-size: 7rem;
   font-weight: 900;
   text-align: center;
   line-height: 1.2;
   letter-spacing: -0.02em;
-  transition: all 0.5s;
+  transition: padding 0.5s;
+  @media screen and (max-width: 1500px) {
+    font-size: 7vw;
+  }
+  @media screen and (max-width: 992px) {
+    padding: 0 0 1em;
+    border-style: none none solid;
+    font-size: 5rem;
+  }
+  @media screen and (max-width: 768px) {
+    font-size: 9vw;
+  }
 `;
 const HomeTextBox = styled.div`
   overflow: hidden;
@@ -58,14 +75,29 @@ const HomeParagraph = styled.p<{ order: number; content: string }>`
   }
 `;
 const HomeNavList = styled.ul`
-  padding-left: var(--container-padding);
+  padding: 0 0 0 var(--container-padding);
   font-size: 3rem;
   font-weight: 900;
   text-transform: lowercase;
+  @media screen and (max-width: 1500px) {
+    font-size: 3vw;
+  }
+  @media screen and (max-width: 992px) {
+    display: flex;
+    padding: var(--container-padding) 0 0;
+    font-size: 2.5rem;
+  }
+  @media screen and (max-width: 768px) {
+    font-size: 5.6vw;
+  }
 `;
 const HomeNavItem = styled.li`
   overflow: hidden;
   padding: 0.5em 0;
+  @media screen and (max-width: 992px) {
+    padding: 0;
+    margin: 0 0.5em;
+  }
 `;
 const HomeIconBox = styled.div`
   overflow: hidden;
@@ -73,7 +105,10 @@ const HomeIconBox = styled.div`
   display: flex;
   align-items: center;
   padding-right: 10px;
-  margin-left: 0.5em;
+  margin: 0 0 0 0.5em;
+  @media screen and (max-width: 992px) {
+    margin: 0.3em 0 0;
+  }
 `;
 const HomeArrowIcon = styled(TfiArrowRight)`
   color: var(--color-black);
@@ -90,13 +125,18 @@ const HomeNavLink = styled(Link)<{ order: number }>`
   opacity: 0.5;
   transform: translateX(-100%);
   animation: ${ani(`to{transform: translateX(0)}`)} 0.5s ${(props) => 1 + props.order * 0.5}s forwards;
-  transition: all 0.5s;
-  &:hover {
-    color: var(--color-black);
-    opacity: 1;
-    ${HomeArrowIcon} {
-      transform: translateX(0);
-      animation: ${ani(`0% {transform: translateX(0)}; 100%{transform: translateX(10px)}`)} 0.5s alternate infinite;
+  transition: color 0.5s, opacity 0.5s;
+  @media screen and (max-width: 992px) {
+    flex-direction: column;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      color: var(--color-black);
+      opacity: 1;
+      ${HomeArrowIcon} {
+        transform: translateX(0);
+        animation: ${ani(`0% {transform: translateX(0)}; 100%{transform: translateX(10px)}`)} 0.5s alternate infinite;
+      }
     }
   }
 `;

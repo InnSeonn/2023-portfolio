@@ -16,6 +16,9 @@ const ProjectDetailLayout = styled.article`
   background-color: var(--color-bg);
   transition: all 0.5s;
   z-index: 9999;
+  @media screen and (max-width: 992px) {
+    flex-direction: column;
+  }
 `;
 const ProjectDetailCol = styled.div<{ col: number }>`
   ${(props) =>
@@ -28,6 +31,9 @@ const ProjectDetailCol = styled.div<{ col: number }>`
         width: 60%;
         border-left: 1px solid var(--color-grey-light);
       `)}
+  @media screen and (max-width: 992px) {
+    width: 100%;
+  }
 `;
 const ProjectStickyBox = styled.div`
   position: sticky;
@@ -68,6 +74,16 @@ const ProjectDetailLink = styled.a.attrs({ target: '_blank' })`
 const ProjectDetailImgBox = styled.div<{ active: boolean }>`
   overflow: hidden;
   padding: var(--container-padding);
+  @media screen and (max-width: 1200px) {
+    padding: calc(var(--container-padding) / 2);
+  }
+  @media screen and (max-width: 992px) {
+    width: 80%;
+    margin: 0 auto;
+  }
+  @media screen and (max-width: 576px) {
+    width: 100%;
+  }
   img {
     visibility: hidden;
     width: 100%;

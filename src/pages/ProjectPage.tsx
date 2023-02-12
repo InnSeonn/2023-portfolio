@@ -21,6 +21,9 @@ const ProjectPageCol = styled.div<{ col: number }>`
         padding: 0 var(--container-padding);
         border-right: 1px solid var(--color-grey-light);
         text-align: right;
+        @media screen and (max-width: 768px) {
+          display: none;
+        }
       `) ||
     (props.col === 2 &&
       css`
@@ -28,7 +31,19 @@ const ProjectPageCol = styled.div<{ col: number }>`
         justify-content: flex-end;
         align-items: center;
         margin: 4.2vh var(--container-padding);
+        @media screen and (max-width: 768px) {
+          margin: 0;
+        }
       `)}
+`;
+const ProjectPageSlideList = styled.ul`
+  display: flex;
+  width: 73vw;
+  transition: transform 0.5s;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    width: 100%;
+  }
 `;
 const ProjectPageSlideBox = styled.div`
   overflow: hidden;
@@ -36,12 +51,13 @@ const ProjectPageSlideBox = styled.div`
   user-select: none;
   &.drag {
     cursor: grabbing;
+    ${ProjectPageSlideList} {
+      transition: transform 0.1s;
+    }
   }
-`;
-const ProjectPageSlideList = styled.ul`
-  display: flex;
-  width: 73vw;
-  transition: all 0.5s;
+  @media screen and (max-width: 768px) {
+    cursor: auto;
+  }
 `;
 
 export default function ProjectPage() {
@@ -53,6 +69,12 @@ export default function ProjectPage() {
   const [page, setPage] = useState(0);
   const layoutRef = useRef<HTMLElement>(null);
   const bounceRef = useRef<(null | HTMLDivElement)[]>([null]);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const matches = window.matchMedia('(max-width: 768px)').matches;
+
+  useEffect(() => {
+    window.addEventListener('resize', () => setWindowWidth(window.innerWidth));
+  }, []);
 
   useEffect(() => {
     //projectDetail 페이지와의 전환 시 애니메이션 적용 안함
@@ -63,13 +85,17 @@ export default function ProjectPage() {
 
   useEffect(() => {
     if (listRef.current === null) return;
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      listRef.current.removeAttribute('style');
+      setPage(0);
+      return;
+    }
     transformX.current =
-      page * (listRef.current.offsetWidth * 0.2) < listRef.current.scrollWidth - listRef.current.offsetWidth
-        ? page * (listRef.current.offsetWidth * 0.2)
+      page * (listRef.current.offsetWidth * 0.15) < listRef.current.scrollWidth - listRef.current.offsetWidth
+        ? page * (listRef.current.offsetWidth * 0.15)
         : listRef.current.scrollWidth - listRef.current.offsetWidth;
-    listRef.current.style.transitionDuration = '0.5s';
     listRef.current.style.transform = `translateX(-${transformX.current}px)`;
-  }, [page]);
+  }, [windowWidth, page]);
 
   const mouseEventHandler = (e: React.MouseEvent) => {
     startX.current = transformX.current + e.clientX;
@@ -90,7 +116,6 @@ export default function ProjectPage() {
       } else {
         transformX.current = startX.current - e.clientX;
       }
-      listRef.current.style.transitionDuration = '0.1s';
       listRef.current.style.transform = `translateX(-${transformX.current}px)`;
     }
   }, []);
@@ -112,7 +137,7 @@ export default function ProjectPage() {
         </ul>
       </ProjectPageCol>
       <ProjectPageCol col={2} ref={(elem) => (bounceRef.current[1] = elem)}>
-        <ProjectPageSlideBox draggable='false' ref={slideRef} onMouseDown={mouseEventHandler}>
+        <ProjectPageSlideBox draggable='false' ref={slideRef} onMouseDown={matches ? undefined : mouseEventHandler}>
           <ProjectPageSlideList ref={listRef}>
             {projectItem.current.map((elem) => (
               <Project key={elem.id} item={elem} page={page} setPage={setPage} />
