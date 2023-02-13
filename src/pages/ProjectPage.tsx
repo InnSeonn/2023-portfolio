@@ -38,15 +38,14 @@ const ProjectPageCol = styled.div<{ col: number }>`
 `;
 const ProjectPageSlideList = styled.ul`
   display: flex;
-  width: 73vw;
-  transition: transform 0.5s;
+  transition: transform 0.3s;
   @media screen and (max-width: 768px) {
     flex-direction: column;
-    width: 100%;
   }
 `;
 const ProjectPageSlideBox = styled.div`
   overflow: hidden;
+  width: 73vw;
   cursor: grab;
   user-select: none;
   &.drag {
@@ -56,6 +55,7 @@ const ProjectPageSlideBox = styled.div`
     }
   }
   @media screen and (max-width: 768px) {
+    width: 100%;
     cursor: auto;
   }
 `;
@@ -85,14 +85,18 @@ export default function ProjectPage() {
 
   useEffect(() => {
     if (listRef.current === null) return;
+    //슬라이드-리스트형 전환 시 위치 조정을 위해 transform, page 초기화
     if (window.matchMedia('(max-width: 768px)').matches) {
       listRef.current.removeAttribute('style');
       setPage(0);
       return;
     }
+
+    //선택된 아이템을 가장 앞쪽으로 위치
+    //슬라이드 뒤쪽에 여백이 생길 경우 슬라이드 끝에 아이템을 위치
     transformX.current =
-      page * (listRef.current.offsetWidth * 0.15) < listRef.current.scrollWidth - listRef.current.offsetWidth
-        ? page * (listRef.current.offsetWidth * 0.15)
+      page * (listRef.current.offsetWidth * 0.15) + page * 40 < listRef.current.scrollWidth - listRef.current.offsetWidth
+        ? page * (listRef.current.offsetWidth * 0.15) + page * 40
         : listRef.current.scrollWidth - listRef.current.offsetWidth;
     listRef.current.style.transform = `translateX(-${transformX.current}px)`;
   }, [windowWidth, page]);
@@ -106,7 +110,8 @@ export default function ProjectPage() {
 
   const handleSlideMove = useCallback((e: Event) => {
     if (listRef.current === null) return;
-    slideRef.current?.classList.add('drag');
+    slideRef.current?.classList.add('drag'); //grabbing 커서로 표시
+    //현재 위치에서 이동한 위치 사이의 거리 계산
     const moveX = e instanceof MouseEvent ? startX.current - e.clientX : e instanceof TouchEvent ? startX.current - e.touches[0].pageX : 0;
     if (moveX < 0) {
       transformX.current = 0;
