@@ -66,11 +66,17 @@ type Props = {
 export default function FullNav({ setFullNav }: Props) {
   const [state, setState] = useState(false);
   useEffect(() => {
+    //FullNav 표시
     setState(true);
     const app = document.querySelector('.App') as HTMLElement;
     app.classList.add('full');
+
+    //577px 이상에서 FullNav 미표시
+    window.addEventListener('resize', handleResizeNav);
+
     return () => {
       app.classList.remove('full');
+      window.removeEventListener('resize', handleResizeNav);
     };
   }, []);
 
@@ -80,6 +86,12 @@ export default function FullNav({ setFullNav }: Props) {
     setTimeout(() => {
       setFullNav(false);
     }, 600);
+  };
+
+  const handleResizeNav = () => {
+    if (window.matchMedia('(min-width: 577px)').matches) {
+      setFullNav(false);
+    }
   };
 
   return (
