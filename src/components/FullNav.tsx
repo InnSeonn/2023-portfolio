@@ -23,6 +23,15 @@ const FullNavLayout = styled.nav<{ state: string }>`
       css`
         transform: translateY(100%);
       `)}
+  &::after {
+    display: block;
+    position: absolute;
+    inset: 0 0 0 0;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/5/5c/Image_gaussian_noise_example.png');
+    opacity: 0.15;
+    z-index: -1;
+    content: '';
+  }
 `;
 const FullNavButton = styled.button`
   color: inherit;
