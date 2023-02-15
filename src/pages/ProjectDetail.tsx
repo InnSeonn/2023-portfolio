@@ -108,9 +108,15 @@ export default function ProjectDetail() {
   const [active, setActive] = useState<number[]>([]);
 
   useEffect(() => {
+    const app = document.querySelector('.App') as HTMLElement;
+    app.classList.add('full');
+
     if (layoutRef.current?.classList.value.includes('enter-done')) {
+      app.classList.remove('full');
       setActive([0]);
     }
+
+    return () => app.classList.remove('full');
   }, [layoutRef.current?.classList.value]);
 
   const backToPage = (e: React.MouseEvent) => {
