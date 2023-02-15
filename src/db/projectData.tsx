@@ -1,6 +1,3 @@
-import todolistImg from '../images/todolist.gif';
-import clonewebImg from '../images/cloneweb.gif';
-
 export type ProjectStoryType = {
   id: number;
   title: string;
@@ -13,7 +10,7 @@ export type ProjectType = {
   text: string;
   github: string;
   website: string;
-  img: string;
+  video: string;
   story: ProjectStoryType[];
 };
 
@@ -22,9 +19,9 @@ const projectData: ProjectType[] = [
     id: 0,
     name: 'portfolio',
     text: '개인 프로젝트와 본인 소개를 담은 반응형 포트폴리오 웹사이트',
-    github: '',
+    github: 'https://github.com/InnSeonn/2023_portfolio',
     website: '',
-    img: '',
+    video: `/videos/portfolio.mp4`,
     story: [
       {
         id: 0,
@@ -59,7 +56,7 @@ const projectData: ProjectType[] = [
     text: '할 일을 추가하고 관리할 수 있는 반응형 투두리스트 웹사이트',
     github: 'https://github.com/InnSeonn/todolist-Projects',
     website: 'https://inn-todolist.vercel.app/',
-    img: `${todolistImg}`,
+    video: `/videos/todolist.mp4`,
     story: [
       {
         id: 0,
@@ -91,7 +88,7 @@ const projectData: ProjectType[] = [
     text: 'UI와 기능을 참고하여 제작한 반응형 클론 웹사이트',
     github: 'https://github.com/InnSeonn/westy-clone-Projects',
     website: 'https://inn-clone-web.vercel.app/',
-    img: `${clonewebImg}`,
+    video: `/videos/clone.mp4`,
     story: [
       {
         id: 0,

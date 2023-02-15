@@ -71,7 +71,7 @@ const ProjectDetailLink = styled.a.attrs({ target: '_blank' })`
   font-weight: 700;
 `;
 
-const ProjectDetailImgBox = styled.div<{ active: boolean }>`
+const ProjectDetailVideoBox = styled.div<{ active: boolean }>`
   overflow: hidden;
   padding: var(--container-padding);
   @media screen and (max-width: 1200px) {
@@ -84,9 +84,10 @@ const ProjectDetailImgBox = styled.div<{ active: boolean }>`
   @media screen and (max-width: 576px) {
     width: 100%;
   }
-  img {
+  video {
     visibility: hidden;
     width: 100%;
+    border: 1px solid var(--color-grey-light);
     transform: translateY(calc(100% + 80px));
     transition: all 0.5s;
     ${(props) =>
@@ -135,9 +136,11 @@ export default function ProjectDetail() {
               </ProjectDetailLink>
             </ProjectDetailLinkBox>
           </ProjectDetailHeader>
-          <ProjectDetailImgBox active={active.length > 0}>
-            <img src={data.current?.img}></img>
-          </ProjectDetailImgBox>
+          <ProjectDetailVideoBox active={active.length > 0}>
+            <video loop autoPlay controls>
+              <source src={data.current?.video} type='video/mp4' />
+            </video>
+          </ProjectDetailVideoBox>
         </ProjectStickyBox>
       </ProjectDetailCol>
       <ProjectDetailCol col={2}>
