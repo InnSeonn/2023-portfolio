@@ -8,6 +8,7 @@ import About from './About';
 import Contact from './Contact';
 import Home from './Home';
 import ProjectPage from './ProjectPage';
+import { useEffect } from 'react';
 
 const AppLayout = styled.div`
   position: relative;
@@ -15,12 +16,23 @@ const AppLayout = styled.div`
   &.full {
     overflow: hidden;
     width: 100%;
-    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
   }
 `;
 
 function App() {
   const location = useLocation();
+
+  useEffect(() => {
+    setViewHeight();
+    window.addEventListener('resize', setViewHeight);
+    return () => window.removeEventListener('resize', setViewHeight);
+  }, []);
+
+  const setViewHeight = () => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  };
 
   return (
     <AppLayout className='App'>

@@ -12,7 +12,7 @@ const ProjectDetailLayout = styled.article`
   left: 0;
   display: flex;
   width: 100%;
-  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
   background-color: var(--color-bg);
   transition: all 0.5s;
   z-index: 9999;
@@ -47,6 +47,7 @@ const ProjectDetailHeader = styled.header`
   padding: var(--container-padding);
 `;
 const ProjectDetailButton = styled.button`
+  color: var(--color-black);
   font-size: 1.25rem;
   svg {
     transform: rotate(-90deg);
@@ -137,7 +138,7 @@ export default function ProjectDetail() {
             </ProjectDetailLinkBox>
           </ProjectDetailHeader>
           <ProjectDetailVideoBox active={active.length > 0}>
-            <video loop autoPlay controls>
+            <video loop autoPlay playsInline>
               <source src={data.current?.video} type='video/mp4' />
             </video>
           </ProjectDetailVideoBox>

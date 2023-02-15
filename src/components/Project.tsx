@@ -33,15 +33,16 @@ const ProjectNameParagraph = styled.p`
   font-size: 1.25rem;
   font-weight: 700;
   transition: font-size 0.5s;
-  @media screen and (max-width: 768px) {
-    font-size: 1.75rem;
-  }
 `;
 const ProjectDescParagraph = styled.p`
   visibility: hidden;
   height: 2em;
   color: var(--color-grey);
   clip-path: inset(0 100% 0 0);
+  @media screen and (max-width: 768px) {
+    visibility: visible;
+    clip-path: inset(0 0 0 0);
+  }
 `;
 const ProjectButton = styled.button`
   visibility: hidden;
@@ -53,6 +54,7 @@ const ProjectButton = styled.button`
   border-radius: 50%;
   background-color: var(--color-black);
   box-shadow: 0px 7px 8px 0px #44444440;
+  color: var(--color-black);
   opacity: 0;
   transform: translateY(30%);
   transition: all 0.5s;
@@ -82,6 +84,10 @@ const ProjectButton = styled.button`
         transform: translate(-50%, -50%) rotate(90deg);
       }
     }
+  }
+  @media screen and (max-width: 768px) {
+    visibility: visible;
+    opacity: 1;
   }
   @media screen and (max-width: 576px) {
     transform: translateY(30%) scale(0.9);
@@ -125,13 +131,6 @@ const ProjectItem = styled.li<{ active: boolean }>`
     &:not(:last-child) {
       margin-right: 0;
       margin-bottom: calc(var(--container-padding) * 2);
-    }
-    ${ProjectDescParagraph} {
-      clip-path: inset(0 0 0 0);
-    }
-    ${ProjectButton} {
-      visibility: visible;
-      opacity: 1;
     }
   }
 `;

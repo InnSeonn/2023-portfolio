@@ -17,7 +17,7 @@ const ProjectPageCol = styled.div<{ col: number }>`
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-end;
-        margin: 4.2vh 0;
+        margin: calc(var(--vh, 1vh) * 4.2) 0;
         padding: 0 var(--container-padding);
         border-right: 1px solid var(--color-grey-light);
         text-align: right;
@@ -30,7 +30,7 @@ const ProjectPageCol = styled.div<{ col: number }>`
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        margin: 4.2vh var(--container-padding);
+        margin: calc(var(--vh, 1vh) * 4.2) var(--container-padding);
         @media screen and (max-width: 768px) {
           margin: 0;
         }

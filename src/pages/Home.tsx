@@ -7,7 +7,7 @@ export const Layout = styled.section`
   overflow-x: hidden;
   overflow-y: auto;
   position: absolute;
-  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
   width: 100%;
   padding: calc(var(--container-padding) * 3) var(--container-padding) var(--container-padding);
   background-color: var(--color-bg);

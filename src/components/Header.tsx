@@ -66,6 +66,7 @@ const HeaderItem = styled.li<{ active: boolean }>`
 const HeaderButton = styled.button`
   width: 1.75rem;
   height: 1.75rem;
+  color: var(--color-black);
   font-size: 1.75rem;
 `;
 
