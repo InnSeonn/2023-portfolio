@@ -99,6 +99,9 @@ const GlobalStyle = createGlobalStyle`
     ::-webkit-scrollbar {
       width: 8px;
       height: 8px;
+      @media (hover: none) and (pointer: coarse) {
+        display: none;
+      }
     }
     ::-webkit-scrollbar-thumb {
       background: #000;

@@ -5,8 +5,8 @@ import { VscMenu } from 'react-icons/vsc';
 import FullNav from './FullNav';
 
 const HeaderLayout = styled.header`
-  position: fixed;
-  inset: 0 8px auto;
+  position: sticky;
+  inset: 0 0 auto;
   padding: 20px var(--container-padding);
   text-transform: lowercase;
   font-size: 1.25rem;
