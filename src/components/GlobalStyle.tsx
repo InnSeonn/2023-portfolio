@@ -101,6 +101,7 @@ const GlobalStyle = createGlobalStyle`
       height: 8px;
       @media (hover: none) and (pointer: coarse) {
         display: none;
+        scrollbar-width: none;
       }
     }
     ::-webkit-scrollbar-thumb {
