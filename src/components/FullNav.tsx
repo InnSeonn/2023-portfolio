@@ -6,12 +6,12 @@ import { Transition } from 'react-transition-group';
 
 const FullNavLayout = styled.nav<{ state: string }>`
   overflow: hidden;
-  position: absolute;
+  position: fixed;
   inset: 0 0 0 0;
   padding: var(--container-padding);
   background-color: var(--color-black);
   color: var(--color-bg);
-  transform: translateY(100%);
+  transform: translateY(calc(var(--vh, 1vh) * 100));
   transition: all 0.5s 0.1s;
   z-index: 9999;
   ${(props) =>
@@ -21,7 +21,7 @@ const FullNavLayout = styled.nav<{ state: string }>`
       `) ||
     ((props.state === 'exiting' || props.state === 'exited') &&
       css`
-        transform: translateY(100%);
+        transform: translateY(calc(var(--vh, 1vh) * 100));
       `)}
   &::after {
     display: block;
@@ -65,6 +65,7 @@ type Props = {
 
 export default function FullNav({ setFullNav }: Props) {
   const [state, setState] = useState(false);
+
   useEffect(() => {
     //FullNav 표시
     setState(true);
