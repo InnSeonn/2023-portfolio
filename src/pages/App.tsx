@@ -11,12 +11,12 @@ import ProjectPage from './ProjectPage';
 import { useEffect } from 'react';
 
 const AppLayout = styled.div`
+  overflow-y: auto;
   position: relative;
+  height: calc(var(--vh, 1vh) * 100);
   background-color: var(--color-bg);
   &.full {
     overflow: hidden;
-    width: 100%;
-    height: calc(var(--vh, 1vh) * 100);
   }
 `;
 

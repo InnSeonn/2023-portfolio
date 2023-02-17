@@ -7,12 +7,13 @@ import projectData from '../db/projectData';
 import ProjectStory from '../components/ProjectStory';
 
 const ProjectDetailLayout = styled.article`
-  position: absolute;
+  overflow-y: auto;
+  position: fixed;
   top: 0;
   left: 0;
   display: flex;
   width: 100%;
-  min-height: calc(var(--vh, 1vh) * 100);
+  height: calc(var(--vh, 1vh) * 100);
   background-color: var(--color-bg);
   transition: all 0.5s;
   z-index: 9999;
@@ -24,6 +25,8 @@ const ProjectDetailCol = styled.div<{ col: number }>`
   ${(props) =>
     (props.col === 1 &&
       css`
+        position: sticky;
+        top: 0;
         width: 40%;
       `) ||
     (props.col === 2 &&
@@ -32,12 +35,9 @@ const ProjectDetailCol = styled.div<{ col: number }>`
         border-left: 1px solid var(--color-grey-light);
       `)}
   @media screen and (max-width: 992px) {
+    position: static;
     width: 100%;
   }
-`;
-const ProjectStickyBox = styled.div`
-  position: sticky;
-  top: 0;
 `;
 const ProjectDetailHeader = styled.header`
   display: flex;
@@ -108,15 +108,9 @@ export default function ProjectDetail() {
   const [active, setActive] = useState<number[]>([]);
 
   useEffect(() => {
-    const app = document.querySelector('.App') as HTMLElement;
-    app.classList.add('full');
-
     if (layoutRef.current?.classList.value.includes('enter-done')) {
-      app.classList.remove('full');
       setActive([0]);
     }
-
-    return () => app.classList.remove('full');
   }, [layoutRef.current?.classList.value]);
 
   const backToPage = (e: React.MouseEvent) => {
@@ -126,29 +120,27 @@ export default function ProjectDetail() {
   return (
     <ProjectDetailLayout id='detail' ref={layoutRef}>
       <ProjectDetailCol col={1}>
-        <ProjectStickyBox>
-          <ProjectDetailHeader>
-            <nav>
-              <ProjectDetailButton onClick={backToPage}>
-                <BsArrowUp />
-              </ProjectDetailButton>
-            </nav>
-            <ProjectDetailHeading>{data.current?.name}</ProjectDetailHeading>
-            <ProjectDetailLinkBox>
-              <ProjectDetailLink href={data.current?.github}>
-                <BsLink45Deg /> readme
-              </ProjectDetailLink>
-              <ProjectDetailLink href={data.current?.website}>
-                <BsLink45Deg /> website
-              </ProjectDetailLink>
-            </ProjectDetailLinkBox>
-          </ProjectDetailHeader>
-          <ProjectDetailVideoBox active={active.length > 0}>
-            <video loop autoPlay playsInline>
-              <source src={data.current?.video} type='video/mp4' />
-            </video>
-          </ProjectDetailVideoBox>
-        </ProjectStickyBox>
+        <ProjectDetailHeader>
+          <nav>
+            <ProjectDetailButton onClick={backToPage}>
+              <BsArrowUp />
+            </ProjectDetailButton>
+          </nav>
+          <ProjectDetailHeading>{data.current?.name}</ProjectDetailHeading>
+          <ProjectDetailLinkBox>
+            <ProjectDetailLink href={data.current?.github}>
+              <BsLink45Deg /> readme
+            </ProjectDetailLink>
+            <ProjectDetailLink href={data.current?.website}>
+              <BsLink45Deg /> website
+            </ProjectDetailLink>
+          </ProjectDetailLinkBox>
+        </ProjectDetailHeader>
+        <ProjectDetailVideoBox active={active.length > 0}>
+          <video loop autoPlay playsInline>
+            <source src={data.current?.video} type='video/mp4' />
+          </video>
+        </ProjectDetailVideoBox>
       </ProjectDetailCol>
       <ProjectDetailCol col={2}>
         {data.current?.story.map((item) => (

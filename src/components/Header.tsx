@@ -6,7 +6,7 @@ import FullNav from './FullNav';
 
 const HeaderLayout = styled.header`
   position: fixed;
-  inset: 0 0 auto 0;
+  inset: 0 8px auto;
   padding: 20px var(--container-padding);
   text-transform: lowercase;
   font-size: 1.25rem;

@@ -108,7 +108,8 @@ const GlobalStyle = createGlobalStyle`
     }
 	}
   html, body {
-    overscroll-behavior: contain;
+    overflow: hidden;
+    overscroll-behavior: none;
   }
 	body {
 		color: var(--color-black);

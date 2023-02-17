@@ -4,8 +4,6 @@ import { ani } from '../components/GlobalStyle';
 import { TfiArrowRight } from 'react-icons/tfi';
 
 export const Layout = styled.section`
-  overflow-x: hidden;
-  overflow-y: auto;
   position: absolute;
   min-height: calc(var(--vh, 1vh) * 100);
   width: 100%;
