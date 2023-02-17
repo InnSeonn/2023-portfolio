@@ -15,6 +15,7 @@ const AppLayout = styled.div`
   position: relative;
   height: calc(var(--vh, 1vh) * 100);
   background-color: var(--color-bg);
+  overscroll-behavior: none;
   &.full {
     overflow: hidden;
   }
