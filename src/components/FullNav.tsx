@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-import { TfiArrowLeft } from 'react-icons/tfi';
+import { TfiClose } from 'react-icons/tfi';
 import { Transition } from 'react-transition-group';
 import { createBrowserHistory } from 'history';
 
@@ -12,29 +12,21 @@ const FullNavLayout = styled.nav<{ state: string }>`
   padding: var(--container-padding);
   background-color: var(--color-black);
   color: var(--color-bg);
-  transform: translateY(calc(var(--vh, 1vh) * 100));
+  transform: translateX(100%);
   transition: all 0.5s 0.1s;
   z-index: 9999;
   ${(props) =>
     ((props.state === 'entering' || props.state === 'entered') &&
       css`
-        transform: translateY(0);
+        transform: translateX(0);
       `) ||
     ((props.state === 'exiting' || props.state === 'exited') &&
       css`
-        transform: translateY(calc(var(--vh, 1vh) * 100));
+        transform: translateX(100%);
       `)}
-  &::after {
-    display: block;
-    position: absolute;
-    inset: 0 0 0 0;
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/5/5c/Image_gaussian_noise_example.png');
-    opacity: 0.15;
-    z-index: -1;
-    content: '';
-  }
 `;
 const FullNavButton = styled.button`
+  margin: auto 0 auto auto;
   color: inherit;
   font-size: 1.75rem;
 `;
@@ -112,8 +104,8 @@ export default function FullNav({ setFullNav }: Props) {
     <Transition in={state} timeout={500}>
       {(state) => (
         <FullNavLayout state={state}>
-          <FullNavButton onClick={closeFullNav}>
-            <TfiArrowLeft />
+          <FullNavButton onClick={closeFullNav} ref={backBtnRef}>
+            <TfiClose />
           </FullNavButton>
           <FullNavList onClick={closeFullNav}>
             <FullNavItem>
