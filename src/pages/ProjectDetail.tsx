@@ -109,19 +109,21 @@ export default function ProjectDetail() {
   const paramsRef = useRef<string | undefined>(useParams().name?.replace(':', ''));
   const data = useRef(projectData.find((data) => data.name === paramsRef.current));
   const layoutRef = useRef<HTMLElement>(null);
-  const [active, setActive] = useState<number[]>([]);
+  const [active, setActive] = useState<number[]>([0]);
   const isBackBtn = useRef<boolean>(false);
 
   useEffect(() => {
+    //992px 이하에서 내용 전체 표시
+    if (window.matchMedia('(max-width: 992px)').matches) {
+      let indexes: number[] = [];
+      data.current?.story.map((item, index) => {
+        indexes = [...indexes, index];
+      });
+      setActive(indexes);
+    }
     window.addEventListener('popstate', preventGoBack);
     return () => window.removeEventListener('popstate', preventGoBack);
   }, []);
-
-  useEffect(() => {
-    if (layoutRef.current?.classList.value.includes('enter-done')) {
-      setActive([0]);
-    }
-  }, [layoutRef.current?.classList.value]);
 
   const backToPage = (e: React.MouseEvent) => {
     isBackBtn.current = true;
