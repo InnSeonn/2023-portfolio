@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { ani } from '../components/GlobalStyle';
-import { RiArrowRightUpLine } from 'react-icons/ri';
+import { BsLink45Deg } from 'react-icons/bs';
 import { Layout } from './Home';
 
 const ContactLayout = styled(Layout)`
@@ -23,8 +23,9 @@ const ContactRow = styled.div`
     border-left: none;
   }
   @media screen and (max-width: 992px) {
+    flex-shrink: 0;
     width: 100%;
-    height: 25%;
+    min-height: 25%;
     border-style: none none solid;
     &:first-child {
       border-style: solid none solid;
@@ -63,63 +64,21 @@ const ContactSmallText = styled.span`
   font-weight: 100;
 `;
 const ContactIcon = styled.div`
-  visibility: hidden;
-  position: absolute;
-  right: var(--container-padding);
-  bottom: 40%;
-  margin: 0 auto;
-  font-size: 17vw;
-  opacity: 0;
-  transition: opacity 0.3s;
+  font-size: 5vw;
   svg {
     display: block;
-    fill: url(#blueYellowGradient);
-    filter: url(#noise);
-  }
-  path {
-    stroke: url(#blueYellowGradient);
-  }
-  @media (hover: none) and (pointer: coarse) {
-    visibility: visible;
-    opacity: 1;
-    animation: ${ani(`to{transform: translate(10%, -10%)}`)} 0.5s alternate infinite;
-  }
-  @media screen and (max-width: 576px) {
-    top: calc(var(--container-padding) / 2);
-    right: calc(var(--container-padding) / 2);
-    bottom: auto;
   }
 `;
 const ContactLink = styled(ContactTextBox).attrs({ target: '_blank' })`
   position: relative;
   transition: all 0.3s;
-  &::after {
-    position: absolute;
-    inset: 0 0 0 0;
-    display: block;
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/5/5c/Image_gaussian_noise_example.png');
-    opacity: 0;
-    content: '';
-  }
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       background-color: var(--color-black);
       color: var(--color-bg);
-      &::after {
-        opacity: 0.15;
-      }
       ${ContactIcon} {
-        visibility: visible;
-        opacity: 1;
         animation: ${ani(`to{transform: translate(10%, -10%)}`)} 0.5s alternate infinite;
       }
-    }
-  }
-  @media (hover: none) and (pointer: coarse) {
-    background-color: var(--color-black);
-    color: var(--color-bg);
-    &::after {
-      opacity: 0.15;
     }
   }
 `;
@@ -131,22 +90,7 @@ export default function Contact() {
         <ContactRow>
           <ContactLink as='a' href='https://github.com/InnSeonn'>
             <ContactIcon>
-              <svg width='0' height='0'>
-                <linearGradient id='blueYellowGradient'>
-                  <stop offset='35%' stopColor='#baecff' />
-                  <stop offset='100%' stopColor='#e4e586' />
-                </linearGradient>
-                <filter id='noise'>
-                  {/* https://www.magicpattern.design/tools/blob-generator */}
-                  {/* https://stackoverflow.com/questions/64946883/apply-noise-to-image-with-transparency-by-use-of-svg-filters */}
-                  <feFlood floodColor='#ffffff' result='neutral-gray' />
-                  <feTurbulence in='neutral-gray' type='fractalNoise' baseFrequency='2.5' numOctaves='100' stitchTiles='stitch' result='noise' />
-                  <feColorMatrix in='noise' type='saturate' values='0' result='destaturatedNoise'></feColorMatrix>
-                  <feComposite operator='in' in2='SourceGraphic' result='theNoise' />
-                  <feBlend in='SourceGraphic' in2='theNoise' mode='soft-light' result='noisy-image' />
-                </filter>
-              </svg>
-              <RiArrowRightUpLine />
+              <BsLink45Deg />
             </ContactIcon>
             <ContactParagraph>
               <ContactSmallText>go to</ContactSmallText> Github
@@ -165,7 +109,7 @@ export default function Contact() {
         <ContactRow>
           <ContactLink as='a' href='https://innseonn.notion.site/8bddbf58e5a34d4c99c1a1ff4c2e71c5'>
             <ContactIcon>
-              <RiArrowRightUpLine />
+              <BsLink45Deg />
             </ContactIcon>
             <ContactParagraph>
               <ContactSmallText>go to</ContactSmallText> Notion Resume

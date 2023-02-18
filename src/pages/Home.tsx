@@ -54,7 +54,6 @@ const HomeParagraph = styled.p<{ order: number; content: string }>`
   color: var(--color-grey-light);
   transform: translateY(100%);
   animation: ${ani(`to{transform: translateY(0)}`)} 0.5s ${(props) => props.order * 0.3}s forwards;
-  &::before,
   &::after {
     display: block;
     position: absolute;
@@ -63,13 +62,6 @@ const HomeParagraph = styled.p<{ order: number; content: string }>`
     clip-path: inset(100% 0 0 0);
     animation: ${ani(`to{clip-path: inset(0 0 0 0)}`)} 2s ${(props) => 1 + props.order * 0.3}s forwards;
     content: '${(props) => props.content}';
-  }
-  &::after {
-    color: transparent;
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/5/5c/Image_gaussian_noise_example.png');
-    -webkit-background-clip: text;
-    background-clip: text;
-    opacity: 0.3;
   }
 `;
 const HomeNavList = styled.ul`
