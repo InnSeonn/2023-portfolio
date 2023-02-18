@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { TfiArrowLeft } from 'react-icons/tfi';
 import { Transition } from 'react-transition-group';
+import { createBrowserHistory } from 'history';
 
 const FullNavLayout = styled.nav<{ state: string }>`
   overflow: hidden;
@@ -65,8 +66,14 @@ type Props = {
 
 export default function FullNav({ setFullNav }: Props) {
   const [state, setState] = useState(false);
+  const backBtnRef = useRef<HTMLButtonElement>(null);
+  const history = createBrowserHistory();
 
   useEffect(() => {
+    //뒤로가기 방지
+    history.push(history.location);
+    window.addEventListener('popstate', preventGoBack);
+
     //FullNav 표시
     setState(true);
     const app = document.querySelector('.App') as HTMLElement;
@@ -78,8 +85,14 @@ export default function FullNav({ setFullNav }: Props) {
     return () => {
       app.classList.remove('full');
       window.removeEventListener('resize', handleResizeNav);
+      window.removeEventListener('popstate', preventGoBack);
     };
   }, []);
+
+  const preventGoBack = () => {
+    //윈도우 뒤로가기 버튼 또는 제스처 시 애니메이션 적용 X
+    setFullNav(false);
+  };
 
   const closeFullNav = (e: React.MouseEvent) => {
     if (!(e.currentTarget instanceof HTMLButtonElement) && !(e.target instanceof HTMLAnchorElement)) return;

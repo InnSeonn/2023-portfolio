@@ -17,6 +17,10 @@ const ProjectDetailLayout = styled.article`
   background-color: var(--color-bg);
   transition: all 0.5s;
   z-index: 9999;
+  &.out {
+    transition: none;
+    transform: translateY(calc(var(--vh, 1vh) * 100));
+  }
   @media screen and (max-width: 992px) {
     flex-direction: column;
   }
@@ -106,6 +110,12 @@ export default function ProjectDetail() {
   const data = useRef(projectData.find((data) => data.name === paramsRef.current));
   const layoutRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState<number[]>([]);
+  const isBackBtn = useRef<boolean>(false);
+
+  useEffect(() => {
+    window.addEventListener('popstate', preventGoBack);
+    return () => window.removeEventListener('popstate', preventGoBack);
+  }, []);
 
   useEffect(() => {
     if (layoutRef.current?.classList.value.includes('enter-done')) {
@@ -114,7 +124,16 @@ export default function ProjectDetail() {
   }, [layoutRef.current?.classList.value]);
 
   const backToPage = (e: React.MouseEvent) => {
+    isBackBtn.current = true;
     navigate(-1);
+  };
+
+  const preventGoBack = (e: Event) => {
+    if (!layoutRef.current) return;
+    if (!isBackBtn.current) {
+      //윈도우 뒤로가기 버튼 또는 제스처 시 애니메이션 적용 X
+      layoutRef.current.classList.add('out');
+    }
   };
 
   return (
