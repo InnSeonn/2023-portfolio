@@ -3,6 +3,7 @@ import { PageType } from './Pagination';
 import { ani } from './GlobalStyle';
 import { useNavigate } from 'react-router-dom';
 import { ProjectType } from '../db/projectData';
+import { useRef, useLayoutEffect } from 'react';
 
 const ProjectImgBox = styled.div`
   position: relative;
@@ -12,7 +13,7 @@ const ProjectImgBox = styled.div`
     height: 333px;
   }
   @media screen and (max-width: 768px) {
-    height: auto;
+    height: 55.65vw;
   }
   img {
     display: block;
@@ -21,6 +22,9 @@ const ProjectImgBox = styled.div`
     object-fit: cover;
     object-position: left;
     -webkit-user-drag: none;
+    @media screen and (max-width: 768px) {
+      height: auto;
+    }
   }
 `;
 const ProjectTextBox = styled.div`
@@ -155,7 +159,7 @@ export default function Project({ item, page, setPage }: Props) {
     <ProjectItem active={id === page ? true : false} onClick={handleItemClick}>
       <ProjectImgBox>
         <picture>
-          <source srcSet={require(`../images/project_700_${id}.png`)} media='(max-width: 1280px'></source>
+          <source srcSet={require(`../images/project_700_${id}.png`)} media='(max-width: 1280px)'></source>
           <img src={require(`../images/project_900_${id}.png`)} alt='' />
         </picture>
         <ProjectButton onClick={goToDetailPage}>자세히보기</ProjectButton>
