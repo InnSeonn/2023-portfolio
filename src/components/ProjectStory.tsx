@@ -112,8 +112,8 @@ const ProjectStoryRow = styled.div<{ active: boolean }>`
         clip-path: inset(0 0 0 0);
       }
     `}
-  @media screen and (max-width: 576px) {
-    padding: var(--container-padding);
+  @media screen and (max-width: 768px) {
+    padding: calc(var(--container-padding) * 0.75);
     margin: calc(var(--container-padding) / 2);
   }
 `;

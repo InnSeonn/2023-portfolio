@@ -32,12 +32,18 @@ const ProjectDetailCol = styled.div<{ col: number }>`
         position: sticky;
         top: 0;
         width: 50%;
+        @media screen and (max-width: 1400px) {
+          width: 40%;
+        }
       `) ||
     (props.col === 2 &&
       css`
         display: flex;
         flex-direction: column;
         width: 50%;
+        @media screen and (max-width: 1400px) {
+          width: 60%;
+        }
       `)}
   @media screen and (max-width: 992px) {
     position: static;
