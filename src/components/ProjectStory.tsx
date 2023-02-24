@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { ProjectStoryType } from '../db/projectData';
 
 const ProjectStoryHeading = styled.h2`
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: 700;
 `;
 const ProjectStoryLangPargraph = styled.p`
@@ -67,14 +67,16 @@ const ProjectStoryButton = styled.button`
     }
   }
   @media screen and (max-width: 992px) {
-    width: 14vw;
-    height: 14vw;
+    width: 8rem;
+    height: 8rem;
   }
 `;
 const ProjectStoryRow = styled.div<{ active: boolean }>`
   position: relative;
   padding: var(--container-padding);
-  border-bottom: 1px solid var(--color-grey-light);
+  margin: var(--container-padding);
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0.4);
   ${(props) =>
     props.active &&
     css`
@@ -97,12 +99,20 @@ const ProjectStoryRow = styled.div<{ active: boolean }>`
         @media screen and (max-width: 992px) {
           width: 5vw;
         }
+        @media screen and (max-width: 576px) {
+          top: var(--container-padding);
+          right: var(--container-padding);
+        }
       }
       ${ProjectStoryDescBox} {
         visibility: visible;
         clip-path: inset(0 0 0 0);
       }
     `}
+  @media screen and (max-width: 576px) {
+    padding: var(--container-padding);
+    margin: calc(var(--container-padding) / 2);
+  }
 `;
 
 type ActiveType = {

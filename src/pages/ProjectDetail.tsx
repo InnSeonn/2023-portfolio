@@ -31,12 +31,13 @@ const ProjectDetailCol = styled.div<{ col: number }>`
       css`
         position: sticky;
         top: 0;
-        width: 40%;
+        width: 50%;
       `) ||
     (props.col === 2 &&
       css`
-        width: 60%;
-        border-left: 1px solid var(--color-grey-light);
+        display: flex;
+        flex-direction: column;
+        width: 50%;
       `)}
   @media screen and (max-width: 992px) {
     position: static;
@@ -61,7 +62,7 @@ const ProjectDetailHeading = styled.h3`
   color: transparent;
   font-size: 3rem;
   font-weight: 900;
-  text-align: center;
+  text-align: right;
   -webkit-text-stroke: 1px var(--color-black);
 `;
 const ProjectDetailLinkBox = styled.div`
@@ -69,11 +70,36 @@ const ProjectDetailLinkBox = styled.div`
   text-align: right;
 `;
 const ProjectDetailLink = styled.a.attrs({ target: '_blank' })`
+  position: relative;
   display: inline-flex;
   align-items: center;
-  padding: 0.5em 0;
-  margin: 1em 0 0 1.4em;
+  padding: 0.2em 0;
+  margin: 2em 0 0 2em;
   font-weight: 700;
+  font-size: 1.125rem;
+  &::after {
+    position: absolute;
+    inset: auto auto -2px 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-black);
+    transition: all 0.5s;
+    content: '';
+  }
+  svg {
+    transition: all 0.5s;
+  }
+  &:hover {
+    &::after {
+      width: 100%;
+    }
+    svg {
+      transform: rotate(270deg);
+    }
+  }
+`;
+const ProjectLinkSpan = styled.span`
+  padding-left: 0.4em;
 `;
 
 const ProjectDetailVideoBox = styled.div<{ active: boolean }>`
@@ -150,10 +176,12 @@ export default function ProjectDetail() {
           <ProjectDetailHeading>{data.current?.name}</ProjectDetailHeading>
           <ProjectDetailLinkBox>
             <ProjectDetailLink href={data.current?.github}>
-              <BsLink45Deg /> readme
+              <BsLink45Deg />
+              <ProjectLinkSpan>Github</ProjectLinkSpan>
             </ProjectDetailLink>
             <ProjectDetailLink href={data.current?.website}>
-              <BsLink45Deg /> website
+              <BsLink45Deg />
+              <ProjectLinkSpan>Website</ProjectLinkSpan>
             </ProjectDetailLink>
           </ProjectDetailLinkBox>
         </ProjectDetailHeader>
@@ -164,9 +192,11 @@ export default function ProjectDetail() {
         </ProjectDetailVideoBox>
       </ProjectDetailCol>
       <ProjectDetailCol col={2}>
-        {data.current?.story.map((item) => (
-          <ProjectStory key={item.id} item={item} active={active} setActive={setActive} />
-        ))}
+        <div>
+          {data.current?.story.map((item) => (
+            <ProjectStory key={item.id} item={item} active={active} setActive={setActive} />
+          ))}
+        </div>
       </ProjectDetailCol>
     </ProjectDetailLayout>
   );

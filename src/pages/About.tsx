@@ -19,7 +19,6 @@ const AboutCol = styled.div<{ col: number }>`
         align-self: center;
         padding-right: 10%;
         border-right: 1px solid var(--color-grey-light);
-        text-align: center;
         @media screen and (max-width: 1400px) {
           padding-right: 7%;
         }
@@ -27,7 +26,6 @@ const AboutCol = styled.div<{ col: number }>`
           align-self: auto;
           padding-right: 0;
           border-right: 0px solid var(--color-grey-light);
-          text-align: left;
         }
       `) ||
     (props.col === 2 &&

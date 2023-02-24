@@ -7,43 +7,40 @@ export const Layout = styled.section`
   position: absolute;
   min-height: calc(var(--vh, 1vh) * 100);
   width: 100%;
-  padding: calc(var(--container-padding) * 3) var(--container-padding) var(--container-padding);
+  padding: calc(var(--container-padding) * 2) var(--container-padding);
   background-color: var(--color-bg);
 `;
 const HomeLayout = styled(Layout)`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 768px) {
+    flex-direction: flex-start;
+  }
 `;
 const HomeBox = styled.div`
   display: flex;
   align-items: flex-end;
   @media screen and (max-width: 992px) {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
   }
 `;
 const HomeTitleBox = styled.div`
-  padding: 0 2em 0 0;
-  border-style: none solid none none;
-  border-width: 1px;
-  border-color: #12121230;
+  padding: 0 1.2em 0 0;
   font-size: 7rem;
   font-weight: 900;
-  text-align: center;
   line-height: 1.2;
-  letter-spacing: -0.02em;
   transition: padding 0.5s;
   @media screen and (max-width: 1500px) {
     font-size: 7vw;
   }
   @media screen and (max-width: 992px) {
-    padding: 0 0 1em;
-    border-style: none none solid;
+    padding: 0;
     font-size: 5rem;
   }
   @media screen and (max-width: 768px) {
-    font-size: 9vw;
+    font-size: 9.7vw;
   }
 `;
 const HomeTextBox = styled.div`
@@ -68,26 +65,20 @@ const HomeNavList = styled.ul`
   padding: 0 0 0 var(--container-padding);
   font-size: 3rem;
   font-weight: 900;
-  text-transform: lowercase;
   @media screen and (max-width: 1500px) {
     font-size: 3vw;
   }
   @media screen and (max-width: 992px) {
-    display: flex;
     padding: var(--container-padding) 0 0;
     font-size: 2.5rem;
   }
   @media screen and (max-width: 768px) {
-    font-size: 5.6vw;
+    font-size: 7.6vw;
   }
 `;
 const HomeNavItem = styled.li`
   overflow: hidden;
   padding: 0.5em 0;
-  @media screen and (max-width: 992px) {
-    padding: 0;
-    margin: 0 0.5em;
-  }
 `;
 const HomeIconBox = styled.div`
   overflow: hidden;
@@ -96,9 +87,6 @@ const HomeIconBox = styled.div`
   align-items: center;
   padding-right: 10px;
   margin: 0 0 0 0.5em;
-  @media screen and (max-width: 992px) {
-    margin: 0.3em 0 0;
-  }
 `;
 const HomeArrowIcon = styled(TfiArrowRight)`
   color: var(--color-black);
@@ -116,9 +104,6 @@ const HomeNavLink = styled(Link)<{ order: number }>`
   transform: translateX(-100%);
   animation: ${ani(`to{transform: translateX(0)}`)} 0.5s ${(props) => 1 + props.order * 0.5}s forwards;
   transition: color 0.5s, opacity 0.5s;
-  @media screen and (max-width: 992px) {
-    flex-direction: column;
-  }
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       color: var(--color-black);
@@ -128,6 +113,9 @@ const HomeNavLink = styled(Link)<{ order: number }>`
         animation: ${ani(`0% {transform: translateX(0)}; 100%{transform: translateX(10px)}`)} 0.5s alternate infinite;
       }
     }
+  }
+  @media screen and (max-width: 768px) {
+    opacity: 1;
   }
 `;
 
@@ -163,7 +151,7 @@ export default function Home() {
           <HomeNavList>
             <HomeNavItem>
               <HomeNavLink to='/about' order={1}>
-                About
+                /about
                 <HomeIconBox>
                   <HomeArrowIcon />
                 </HomeIconBox>
@@ -171,7 +159,7 @@ export default function Home() {
             </HomeNavItem>
             <HomeNavItem>
               <HomeNavLink to='/projects' order={2}>
-                Projects
+                /projects
                 <HomeIconBox>
                   <HomeArrowIcon />
                 </HomeIconBox>
@@ -179,7 +167,7 @@ export default function Home() {
             </HomeNavItem>
             <HomeNavItem>
               <HomeNavLink to='/contact' order={3}>
-                Contact
+                /contact
                 <HomeIconBox>
                   <HomeArrowIcon />
                 </HomeIconBox>
