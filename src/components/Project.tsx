@@ -3,7 +3,7 @@ import { PageType } from './Pagination';
 import { ani } from './GlobalStyle';
 import { useNavigate } from 'react-router-dom';
 import { ProjectType } from '../db/projectData';
-import { useRef, useLayoutEffect } from 'react';
+import React, { useMemo, useLayoutEffect } from 'react';
 
 const ProjectImgBox = styled.div`
   position: relative;
@@ -143,9 +143,10 @@ type Props = PageType & {
   item: ProjectType;
 };
 
-export default function Project({ item, page, setPage }: Props) {
+function Project({ item, page, setPage }: Props) {
   const { id, name, text } = item;
   const navigate = useNavigate();
+  const images = useMemo(() => [require(`../images/project_700_${id}.png`), require(`../images/project_900_${id}.png`)], [id]);
 
   const handleItemClick = (e: React.MouseEvent) => {
     setPage(id);
@@ -159,8 +160,8 @@ export default function Project({ item, page, setPage }: Props) {
     <ProjectItem active={id === page ? true : false} onClick={handleItemClick}>
       <ProjectImgBox>
         <picture>
-          <source srcSet={require(`../images/project_700_${id}.png`)} media='(max-width: 1280px)'></source>
-          <img src={require(`../images/project_900_${id}.png`)} alt='' />
+          <source srcSet={images[0]} media='(max-width: 1280px)'></source>
+          <img src={images[1]} alt='' />
         </picture>
         <ProjectButton onClick={goToDetailPage}>자세히보기</ProjectButton>
       </ProjectImgBox>
@@ -171,3 +172,5 @@ export default function Project({ item, page, setPage }: Props) {
     </ProjectItem>
   );
 }
+
+export default React.memo(Project);
