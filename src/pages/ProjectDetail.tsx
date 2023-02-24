@@ -139,14 +139,6 @@ export default function ProjectDetail() {
   const isBackBtn = useRef<boolean>(false);
 
   useEffect(() => {
-    //992px 이하에서 내용 전체 표시
-    if (window.matchMedia('(max-width: 992px)').matches) {
-      let indexes: number[] = [];
-      data.current?.story.map((item, index) => {
-        indexes = [...indexes, index];
-      });
-      setActive(indexes);
-    }
     window.addEventListener('popstate', preventGoBack);
     return () => window.removeEventListener('popstate', preventGoBack);
   }, []);

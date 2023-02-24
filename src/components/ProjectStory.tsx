@@ -30,6 +30,10 @@ const ProjectStoryDescBox = styled.div`
   word-break: break-all;
   white-space: pre-line;
   transition: all 0.5s;
+  @media screen and (max-width: 992px) {
+    visibility: visible;
+    clip-path: none;
+  }
 `;
 const ProjectStoryButton = styled.button`
   position: absolute;
@@ -67,8 +71,7 @@ const ProjectStoryButton = styled.button`
     }
   }
   @media screen and (max-width: 992px) {
-    width: 8rem;
-    height: 8rem;
+    display: none;
   }
 `;
 const ProjectStoryRow = styled.div<{ active: boolean }>`
