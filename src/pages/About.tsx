@@ -9,6 +9,7 @@ const AboutLayout = styled(Layout)`
   justify-content: center;
   @media screen and (max-width: 992px) {
     flex-direction: column;
+    padding-top: calc(var(--container-padding) * 3);
   }
 `;
 const AboutCol = styled.div<{ col: number }>`

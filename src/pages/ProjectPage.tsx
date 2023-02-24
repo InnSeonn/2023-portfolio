@@ -8,6 +8,9 @@ import { Layout } from './Home';
 const ProjectPageLayout = styled(Layout)`
   display: flex;
   justify-content: center;
+  @media screen and (max-width: 768px) {
+    padding-top: calc(var(--container-padding) * 3);
+  }
 `;
 const ProjectPageCol = styled.div<{ col: number }>`
   ${(props) =>
