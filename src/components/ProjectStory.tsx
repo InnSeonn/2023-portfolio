@@ -99,19 +99,18 @@ const ProjectStoryRow = styled.div<{ active: boolean }>`
             transform: none;
           }
         }
-        @media screen and (max-width: 992px) {
-          width: 5vw;
-        }
-        @media screen and (max-width: 576px) {
-          top: var(--container-padding);
-          right: var(--container-padding);
-        }
       }
       ${ProjectStoryDescBox} {
         visibility: visible;
         clip-path: inset(0 0 0 0);
       }
     `}
+  @media screen and (max-width: 1400px) {
+    margin-left: 0;
+  }
+  @media screen and (max-width: 1200px) {
+    margin: var(--container-padding);
+  }
   @media screen and (max-width: 768px) {
     padding: calc(var(--container-padding) * 0.75);
     margin: calc(var(--container-padding) / 2);

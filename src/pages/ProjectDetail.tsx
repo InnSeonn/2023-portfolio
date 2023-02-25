@@ -21,7 +21,7 @@ const ProjectDetailLayout = styled.article`
     transition: none;
     transform: translateY(calc(var(--vh, 1vh) * 100));
   }
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 1200px) {
     flex-direction: column;
   }
 `;
@@ -33,7 +33,7 @@ const ProjectDetailCol = styled.div<{ col: number }>`
         top: 0;
         width: 50%;
         @media screen and (max-width: 1400px) {
-          width: 40%;
+          width: 45%;
         }
       `) ||
     (props.col === 2 &&
@@ -42,10 +42,10 @@ const ProjectDetailCol = styled.div<{ col: number }>`
         flex-direction: column;
         width: 50%;
         @media screen and (max-width: 1400px) {
-          width: 60%;
+          width: 55%;
         }
       `)}
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 1200px) {
     position: static;
     width: 100%;
   }
@@ -111,19 +111,16 @@ const ProjectLinkSpan = styled.span`
 const ProjectDetailVideoBox = styled.div<{ active: boolean }>`
   overflow: hidden;
   padding: var(--container-padding);
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 768px) {
     padding: calc(var(--container-padding) / 2);
-  }
-  @media screen and (max-width: 992px) {
-    width: 80%;
-    margin: 0 auto;
-  }
-  @media screen and (max-width: 576px) {
-    width: 100%;
   }
   video {
     visibility: hidden;
+    display: block;
     width: 100%;
+    max-width: 760px;
+    max-height: 660px;
+    margin: 0 auto;
     border: 1px solid var(--color-grey-light);
     transform: translateY(calc(100% + 80px));
     transition: all 0.5s;
