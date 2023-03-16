@@ -153,7 +153,7 @@ function Project({ item, page, setPage }: Props) {
   };
 
   const goToDetailPage = (e: React.MouseEvent) => {
-    navigate(`./detail/:${name}`);
+    navigate(`./detail/${name}`);
   };
 
   return (

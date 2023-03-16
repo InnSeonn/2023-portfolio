@@ -135,7 +135,7 @@ const ProjectDetailVideoBox = styled.div<{ active: boolean }>`
 
 export default function ProjectDetail() {
   const navigate = useNavigate();
-  const paramsRef = useRef<string | undefined>(useParams().name?.replace(':', ''));
+  const paramsRef = useRef<string | undefined>(useParams().name);
   const data = useRef(projectData.find((data) => data.name === paramsRef.current));
   const layoutRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState<number[]>([0]);
