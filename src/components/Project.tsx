@@ -146,7 +146,7 @@ type Props = PageType & {
 function Project({ item, page, setPage }: Props) {
   const { id, name, text } = item;
   const navigate = useNavigate();
-  const images = useMemo(() => [require(`../images/project_700_${id}.png`), require(`../images/project_900_${id}.png`)], [id]);
+  const images = useMemo(() => [require(`../images/${name}_700.png`), require(`../images/${name}_900.png`)], [id]);
 
   const handleItemClick = (e: React.MouseEvent) => {
     setPage(id);
