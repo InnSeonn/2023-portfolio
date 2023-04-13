@@ -168,7 +168,7 @@ export default function ProjectDetail() {
               <BsArrowUp />
             </ProjectDetailButton>
           </nav>
-          <ProjectDetailHeading>{data.current?.name}</ProjectDetailHeading>
+          <ProjectDetailHeading>{data.current?.title}</ProjectDetailHeading>
           <ProjectDetailLinkBox>
             <ProjectDetailLink href={data.current?.github}>
               <BsLink45Deg />

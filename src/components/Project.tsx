@@ -144,7 +144,7 @@ type Props = PageType & {
 };
 
 function Project({ item, page, setPage }: Props) {
-  const { id, name, text } = item;
+  const { id, name, title, text } = item;
   const navigate = useNavigate();
   const images = useMemo(() => [require(`../images/${name}_700.png`), require(`../images/${name}_900.png`)], [id]);
 
@@ -166,7 +166,7 @@ function Project({ item, page, setPage }: Props) {
         <ProjectButton onClick={goToDetailPage}>자세히보기</ProjectButton>
       </ProjectImgBox>
       <ProjectTextBox>
-        <ProjectNameParagraph>{name}</ProjectNameParagraph>
+        <ProjectNameParagraph>{title}</ProjectNameParagraph>
         <ProjectDescParagraph>{text}</ProjectDescParagraph>
       </ProjectTextBox>
     </ProjectItem>

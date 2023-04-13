@@ -7,6 +7,7 @@ export type ProjectStoryType = {
 export type ProjectType = {
   id: number;
   name: string;
+  title: string;
   text: string;
   github: string;
   website: string;
@@ -17,7 +18,53 @@ export type ProjectType = {
 const projectData: ProjectType[] = [
   {
     id: 0,
+    name: 'find-animal-crossing',
+    title: '찾아봐요, 동물의 숲',
+    text: '나와 닮은 동물의 숲 주민 캐릭터 찾기',
+    github: 'https://github.com/InnSeonn/find-animal-crossing',
+    website: 'https://find-animal-crossing.vercel.app/',
+    video: `/videos/find-animal-crossing.mp4`,
+    story: [
+      {
+        id: 0,
+        title: '프로젝트 소개',
+        lang: ['React', 'Typescript', 'Redux', 'Firebase', 'Express', 'HTML5', 'Styled-Components'],
+        desc: `나와 닮은 '모여봐요 동물의 숲' 게임의 주민 캐릭터를 찾아보는 웹사이트입니다.
+        찾동숲 프로젝트는 현재 미완성된 상태이며, 구현 진행 중에 있습니다.
+        `,
+      },
+      {
+        id: 1,
+        title: '주요 기능',
+        desc: `'찾기' 탭에서 나와 닮은, 취향이 비슷한, 생일이 같은 주민 캐릭터를 찾을 수 있습니다. 사용자가 단계에 따라 해당하는 옵션을 선택하면 서버에 요청을 보내 결과를 응답 받고 화면에 표시하게 됩니다. 서버의 응답을 기다리는 동안은 로딩 화면을 표시합니다. 일치하는 주민이 여럿일 경우 슬라이드로 표시하고, 존재하지 않을 경우 메시지와 함께 실패 화면을 표시합니다. 메시지는 사용자가 성공적인 찾기 결과를 얻을 수 있도록 도움을 주고 다시하기를 유도하는 역할을 합니다.
+        
+        '랭킹' 탭에서는 찾기 결과로 많이 등장한 주민을 나와 닮은, 취향이 비슷한 카테고리로 나누어 표시합니다. 랭킹은 서버에서 응답 받은 결과를 표시하는데, 서버에서는 DB를 조회하여 랭킹을 내림차순으로 10개까지 가져와 1~3위까지 구분합니다. 동일한 순위에 해당하는 주민이 3개 초과인 경우 순위 분별력을 위해 해당 순위부터 아래 순위까지는 응답 보내지 않습니다. 1위 주민이 3개 초과일 경우, 에러 메시지를 응답합니다. 에러 메시지를 응답 받은 경우, 데이터 부족 메시지와 함께 사용자를 찾기 탭으로 유도합니다.
+        
+        '도감' 탭에서는 전체 주민의 정보를 확인하고 검색할 수 있습니다. 현재 구현 중입니다.
+        `,
+      },
+      {
+        id: 2,
+        title: '새롭게 배우고 활용한 부분',
+        desc: `- Redux를 사용한 상태 관리
+        프로그레스바의 상태값과 업데이트 로직을 공유하여 재사용하고, 서버에서 응답 받은 옵션 목록을 새로고침이나 페이지 이동 시에도 유지시켜 서버 요청 횟수를 줄이고, 찾기 결과값을 저장해두고 비교하여 중복 요청을 방지하기 위해 Redux를 사용했습니다. redux-toolkit을 사용했기 때문에 action과 reducer를 따로 작성할 필요 없이 createSlice()를 통해 각 action에 따른 reducer를 작성해주었습니다. 여러개의 reducer를 사용할 경우 combineReducers()로 묶어주고 configureStore()로 한번에 내보내기하여 편리하게 사용할 수 있었습니다. props 전달 없이 프로그레스바의 상태값을 확인하고 업데이트 할 수 있어 컴포넌트에서 작성하는 코드가 줄고 가독성을 높일 수 있었습니다. 상태값을 유지하기 위해서는 redux-persist를 사용했습니다. 스토로지는 로컬스토로지를 사용했고, persist config의 whitelist 값에 스토로지에 저장할 리듀서를 나열하여 찾기에 필요한 옵션 목록값을 유지시키고, 찾기 결과와 location.key값을 함께 저장하여 사용자가 결과화면에서 새로고침 하거나 다른 페이지에서 결과 화면으로 되돌아올 경우 key값을 비교하여 중복 요청을 방지하도록 했습니다.
+        
+        - firebase를 통한 데이터베이스 관리
+        주민 데이터를 저장하고 관리할 수 있는 데이터베이스가 필요했고, 혼자서 개발 했기 때문에 쉽게 구현이 가능하고 사용법이 간단한 firestore를 사용하게 되었습니다. 클라이언트 측에서 직접 DB에 접근하지 않고 서버에 요청하여 응답받은 데이터를 화면에 표시하고자 Express 서버를 구축하여 해당 서버에 api 요청을 보내는 방식으로 구현했습니다. firebase-admin 패키지를 설치하여 firestore를 가져오고 쿼리문을 통해 데이터를 조회할 수 있었습니다. 데이터베이스를 빠르게 구축하고 사용하기에는 편리했지만, 복합 쿼리에서 필드 하나에서만 범위 비교를 할 수 있고, 최대 1개의 'array-contains-any' 절만 사용이 가능하는 등 쿼리에 제약이 있어 불편함도 있었습니다.
+        `,
+      },
+      {
+        id: 3,
+        title: '고민한 부분',
+        desc: `서버에 요청을 보내고 응답을 받아 찾기 결과 화면을 표시하는 과정에서 일치하는 주민이 없을 경우, 그 이유를 사용자에게 알려주고 싶었습니다. 서버에서 사용자가 선택한 옵션을 받아 DB를 조회하고 로직을 처리했기 때문에 클라이언트 측에서는 단순히 에러 응답으로는 명확한 이유를 파악할 수 없었습니다. 그래서 로직 처리 단계마다 일치하는 주민이 없을 경우, 응답 코드와 함께 메시지를 작성하여 클라이언트 측에서 에러의 이유를 알 수 있도록 하였습니다. 예를 들어, '나와 닮은' 주민을 찾는 과정에서 '남자'인 '강아지' 주민이 없는 경우 404 응답 코드와 함께 '강아지 주민은 남자가 없어요'라는 메시지를 보내고, '남자인 강아지 주민'과 일치하는 '성격이' 없을 경우, 404 응답 코드와 함께 '강아지 주민과 일치하는 성격이 없어요'라는 메시지를 함께 보냈습니다. 일치하는 주민이 있는 경우 200 응답 코드와 함께 주민 배열을 전송했습니다. 클라이언트에서는 응답 메시지를 결과 화면에 표시하여 사용자에게 'tip' 메시지를 줄 수 있었습니다.
+        `,
+      },
+    ],
+  },
+  {
+    id: 1,
     name: 'portfolio',
+    title: '2023 Portfolio',
     text: '개인 프로젝트와 본인 소개를 담은 반응형 포트폴리오 웹사이트',
     github: 'https://github.com/InnSeonn/2023_portfolio',
     website: 'https://inn-portfolio.vercel.app/',
@@ -51,8 +98,9 @@ const projectData: ProjectType[] = [
     ],
   },
   {
-    id: 1,
+    id: 2,
     name: 'todolist',
+    title: 'Todolist',
     text: '할 일을 추가하고 관리할 수 있는 반응형 투두리스트 웹사이트',
     github: 'https://github.com/InnSeonn/todolist-Projects',
     website: 'https://inn-todolist.vercel.app/',
@@ -84,8 +132,9 @@ const projectData: ProjectType[] = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     name: 'clone',
+    title: 'Clone Website',
     text: 'UI와 기능을 참고하여 제작한 반응형 클론 웹사이트',
     github: 'https://github.com/InnSeonn/westy-clone-Projects',
     website: 'https://inn-clone-web.vercel.app/',
