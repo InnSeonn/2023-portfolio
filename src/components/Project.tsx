@@ -34,7 +34,7 @@ const ProjectNameParagraph = styled.p`
   padding: 0.5em 0 0.2em;
   margin-bottom: 0.5em;
   border-bottom: 1px solid var(--color-grey-light);
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   font-weight: 700;
   transition: font-size 0.5s;
 `;

@@ -110,18 +110,19 @@ const ProjectLinkSpan = styled.span`
 
 const ProjectDetailVideoBox = styled.div<{ active: boolean }>`
   overflow: hidden;
+  height: calc(var(--vh, 1vh) * 75);
   padding: var(--container-padding);
   @media screen and (max-width: 768px) {
+    height: auto;
     padding: calc(var(--container-padding) / 2);
   }
   video {
     visibility: hidden;
     display: block;
-    width: 100%;
     max-width: 760px;
-    max-height: 660px;
+    width: 100%;
+    height: 100%;
     margin: 0 auto;
-    border: 1px solid var(--color-grey-light);
     transform: translateY(calc(100% + 80px));
     transition: all 0.5s;
     ${(props) =>

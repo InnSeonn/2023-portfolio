@@ -199,13 +199,14 @@ export default function About() {
     <AboutLayout>
       <AboutCol col={1}>
         <AboutTitleParagraph>
-          끈질기게
+          1px 차이를
           <br />
-          문제를 해결하는
+          고민하는
         </AboutTitleParagraph>
         <AboutDescParagraph>
-          작성한 코드가 화면으로 실현되는 즐거움에 빠져 프론트엔드 분야를 공부하고 있으며 오랜 시간이 걸리더라도 포기하지 않고 문제를 해결하려는 집념을 가지고 있습니다. 보기 좋은, 사용하기 편한 화면은
-          다시 찾는 서비스를 만드는 중요한 요소이기 때문에 UI/UX를 깊이 고민하는 프론트엔드 개발자가 되고 싶습니다.
+          작성한 코드가 화면으로 실현되는 즐거움에 빠져 프론트엔드 분야를 공부하고 있으며 오랜 시간이 걸리더라도
+          포기하지 않고 문제를 해결하려는 집념을 가지고 있습니다. 보기 좋은, 사용하기 편한 화면은 다시 찾는 서비스를
+          만드는 중요한 요소이기 때문에 UI/UX를 깊이 고민하는 프론트엔드 개발자가 되고 싶습니다.
         </AboutDescParagraph>
         <AboutLink href='https://innseonn.notion.site/8bddbf58e5a34d4c99c1a1ff4c2e71c5' target='_blank'>
           <AboutLinkBox>
